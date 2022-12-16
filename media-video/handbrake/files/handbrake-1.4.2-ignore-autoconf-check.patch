@@ -1,0 +1,12 @@
+diff --git a/make/configure.py b/make/configure.py
+index 86dd6c1..291d226 100644
+--- a/make/configure.py
++++ b/make/configure.py
+@@ -1649,7 +1649,6 @@ try:
+         else:
+             gmake  = ToolProbe( 'GMAKE.exe',      'make',       'gmake', 'make', abort=True )
+ 
+-        autoconf   = ToolProbe( 'AUTOCONF.exe',   'autoconf',   'autoconf', abort=True, minversion=[2,69,0] )
+         automake   = ToolProbe( 'AUTOMAKE.exe',   'automake',   'automake', abort=True, minversion=[1,13,0] )
+         libtool    = ToolProbe( 'LIBTOOL.exe',    'libtool',    'libtool', abort=True )
+         lipo       = ToolProbe( 'LIPO.exe',       'lipo',       'lipo', abort=False )
