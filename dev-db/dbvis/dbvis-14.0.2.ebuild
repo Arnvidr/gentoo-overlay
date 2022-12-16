@@ -48,10 +48,10 @@ src_install() {
 
 	dosym ${INSTALLDIR}/dbvis /opt/bin/${PN}
 
-	newicon --size 48 .install4j/i4j_extf_10_1bd0g0g_1alkt4u.png ${PN}.png
-	newicon --size 96 .install4j/i4j_extf_10_1bd0g0g_1alkt4u@2x.png ${PN}.png
-	newicon --size 128 .install4j/i4j_extf_9_1bd0g0g_1c0oll4.png ${PN}.png
-	newicon --size 256 .install4j/i4j_extf_9_1bd0g0g_1c0oll4@2x.png ${PN}.png
+	newicon --size 48 .install4j/i4j_extf_10_1bd0g0g_itvrmw.png ${PN}.png
+	newicon --size 96 .install4j/i4j_extf_10_1bd0g0g_itvrmw@2x.png ${PN}.png
+	newicon --size 128 .install4j/i4j_extf_9_1bd0g0g_10k6n0b.png ${PN}.png
+	newicon --size 256 .install4j/i4j_extf_9_1bd0g0g_10k6n0b@2x.png ${PN}.png
 
 	make_desktop_entry ${PN} "DbVisualizer ${PV}" ${PN} "Development;Database" 
 }
