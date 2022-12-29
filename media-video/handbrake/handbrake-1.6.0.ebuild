@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{8..10} )
 
-inherit autotools eutils gnome2-utils python-any-r1 xdg-utils
+inherit autotools python-any-r1 toolchain-funcs xdg
 
 if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/HandBrake/HandBrake.git"
@@ -29,26 +29,32 @@ IUSE="+fdk gstreamer gtk numa x265"
 
 RDEPEND="
 	app-arch/xz-utils
-	dev-libs/jansson
+	dev-libs/fribidi
+	dev-libs/jansson:=
 	dev-libs/libxml2
 	media-libs/a52dec
-	>=media-libs/dav1d-0.9.0
+	>=media-libs/dav1d-1.0.0:=
+	media-libs/freetype
+	media-libs/harfbuzz
 	media-libs/libass:=
-	>=media-libs/libbluray-1.3.0
+	>=media-libs/libbluray-1.3.4:=
 	media-libs/libdvdnav
 	media-libs/libdvdread:=
-	media-libs/libjpeg-turbo
+	media-libs/libjpeg-turbo:=
 	media-libs/libmkv
+	media-libs/libogg
 	media-libs/libtheora
 	media-libs/libvorbis
-	>=media-libs/libvpx-1.10.0
+	>=media-libs/libvpx-1.12.0:=
 	media-libs/opus
 	media-libs/speex
+	>=media-libs/svt-av1-1.4.1
 	media-libs/x264:=
 	media-libs/zimg
 	media-sound/lame
+	>=media-video/ffmpeg-5.1.2:0=[postproc,fdk?]
 	sys-libs/zlib
-	>=media-video/ffmpeg-4.4:0=[fdk?]
+	fdk? ( media-libs/fdk-aac:= )
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
@@ -70,43 +76,42 @@ RDEPEND="
 		x11-libs/libnotify
 		x11-libs/pango
 	)
-	fdk? ( media-libs/fdk-aac )
-	x265? ( media-libs/x265:0=[10bit,12bit,numa?] )
+	x265? ( >=media-libs/x265-3.2:0=[10bit,12bit,numa?] )
 	"
 
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	dev-lang/yasm
 	dev-util/intltool
-	sys-devel/automake"
+"
 
-PATCHES=(
+# Patches for 1.6.0 not checked yet because of missing dependencies
+#PATCHES=(
 	# Fix missing flags
-	"${FILESDIR}/${P}-missing-linker-flags.patch"
-	"${FILESDIR}/${P}-missing-linker-flags-cli.patch"
-	"${FILESDIR}/${P}-ignore-autoconf-check.patch"
-)
+#	"${FILESDIR}/${P}-missing-linker-flags.patch"
+#	"${FILESDIR}/${P}-missing-linker-flags-cli.patch"
+#	"${FILESDIR}/${P}-missing-linker-flags-test.patch"
+#	"${FILESDIR}/${P}-ignore-autoconf-check.patch"
+#	"${FILESDIR}/${P}-ffmpeg-5.0.patch"
+#)
 
-#pkg_setup() {
-#	python-any-r1_pkg_setup
-#}
+src_prepare() {
+	default
 
-#src_prepare() {
-#	default
-
-	# cd "${S}/gtk"
-	# Don't run autogen.sh.
-	# sed -i '/autogen.sh/d' module.rules || die "Removing autogen.sh call failed"
-	# eautoreconf
-#}
+	cd "${S}/gtk" || die
+	eautoreconf
+}
 
 src_configure() {
+	tc-export AR RANLIB STRIP
+
 	./configure \
 		--force \
 		--verbose \
 		--prefix="${EPREFIX}/usr" \
 		--disable-gtk-update-checks \
 		--disable-flatpak \
+		--enable-ffmpeg-aac \
 		$(usex fdk --enable-fdk-aac) \
 		$(usex !gtk --disable-gtk) \
 		$(usex !gstreamer --disable-gst) \
@@ -116,12 +121,6 @@ src_configure() {
 
 src_compile() {
 	emake -C build
-
-	# TODO: Documentation building is currently broken, try to fix it.
-	#
-	# if use doc ; then
-	# 	emake -C build doc
-	# fi
 }
 
 src_install() {
@@ -138,13 +137,5 @@ pkg_postinst() {
 		einfo "For the GTK+ version of HandBrake, you can run \`ghb\`."
 	fi
 
-	xdg_desktop_database_update
-}
-
-pkg_preinst() {
-	gnome2_icon_savelist
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
+	xdg_pkg_postinst
 }
