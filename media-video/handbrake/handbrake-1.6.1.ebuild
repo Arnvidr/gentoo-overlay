@@ -85,7 +85,7 @@ DEPEND="${RDEPEND}
 	dev-util/intltool
 "
 
-# Patches for 1.6.0 not checked yet because of missing dependencies
+# Patches for 1.6.1 not checked yet because of masked ffmpeg 5
 #PATCHES=(
 	# Fix missing flags
 #	"${FILESDIR}/${P}-missing-linker-flags.patch"
