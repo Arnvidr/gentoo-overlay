@@ -91,6 +91,14 @@ CRATES="
 	winapi-i686-pc-windows-gnu-0.4.0
 	winapi-util-0.1.5
 	winapi-x86_64-pc-windows-gnu-0.4.0
+	windows-sys-0.42.0
+	windows_aarch64_gnullvm-0.42.1
+	windows_aarch64_msvc-0.42.1
+	windows_i686_gnu-0.42.1
+	windows_i686_msvc-0.42.1
+	windows_x86_64_gnu-0.42.1
+	windows_x86_64_gnullvm-0.42.1
+	windows_x86_64_msvc-0.42.1
 "
 
 inherit cargo
