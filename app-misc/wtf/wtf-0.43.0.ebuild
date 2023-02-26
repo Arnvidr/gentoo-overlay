@@ -4,7 +4,7 @@
 EAPI=7
 
 # Change this when you update the ebuild
-GIT_COMMIT="fb027f1ec75b52137bc2828a8e0976a510b5591e"
+GIT_COMMIT="ea7f6ed1ce0e3a96c7ce7aa337bfdae9cfc27a93"
 EGO_PN="github.com/wtfutil/${PN}"
 
 inherit golang-vcs-snapshot-r1
