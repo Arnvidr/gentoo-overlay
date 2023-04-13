@@ -26,6 +26,7 @@ DEPEND=">=dev-python/pygobject-3.30[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	>=x11-libs/gtk+-3
+	# Only slotted to keep the same version as lutris, to avoid two installs
 	>=net-libs/webkit-gtk-2.6:4.1
 "
 RDEPEND="${DEPEND}
