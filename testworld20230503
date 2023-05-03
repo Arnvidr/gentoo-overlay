@@ -1,7 +1,7 @@
 
 These are the packages that would be merged, in order:
 
-Calculating dependencies  ... [31;01m*[0m ERROR: games-util/minigalaxy-9999::metahax failed (depend phase):
+Calculating dependencies  . [31;01m*[0m ERROR: games-util/minigalaxy-9999::metahax failed (depend phase):
  [31;01m*[0m   No supported implementation in PYTHON_COMPAT.
  [31;01m*[0m 
  [31;01m*[0m Call stack:
@@ -22,13 +22,14 @@ Calculating dependencies  ... [31;01m*[0m ERROR: games-util/minigalaxy-9999::m
  [31;01m*[0m the complete build log and the output of `emerge -pqv '=games-util/minigalaxy-9999::metahax'`.
  [31;01m*[0m Working directory: '/usr/lib/python3.10/site-packages'
  [31;01m*[0m S: '/var/tmp/portage/games-util/minigalaxy-9999/work/minigalaxy-9999'
-. .... done!
-Dependency resolution took 74.39 s.
+...... done!
+Dependency resolution took 81.65 s.
 
 
-emerge: there are no ebuilds built with USE flags to satisfy ">=media-libs/libopenshot-0.3.0:0=[python,python_single_target_python3_10(-)?,python_single_target_python3_11(-)?]".
+emerge: there are no ebuilds built with USE flags to satisfy ">=dev-lang/python-3.11.1-r1:3.11[xml]".
 !!! One of the following packages is required to complete your request:
-- media-video/openshot-3.0.0::arnvidr-overlay (Change USE: -python_single_target_python3_11, this change violates use flag constraints defined by media-video/openshot-3.0.0: 'exactly-one-of ( python_single_target_python3_10 python_single_target_python3_11 )')
-(dependency required by "media-video/openshot-3.0.0::arnvidr-overlay" [ebuild])
+- dev-lang/python-3.11.3::gentoo (Missing IUSE: xml)
+- dev-lang/python-3.11.2_p2::gentoo (Missing IUSE: xml)
+(dependency required by "media-video/openshot-3.0.0::arnvidr-overlay[python_single_target_python3_11]" [ebuild])
 (dependency required by "@selected" [set])
 (dependency required by "@world" [argument])
