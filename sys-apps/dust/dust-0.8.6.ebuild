@@ -34,7 +34,7 @@ CRATES="
 	errno-0.3.1
 	errno-dragonfly-0.1.2
 	fastrand-1.9.0
-	getrandom-0.2.7
+	getrandom-0.2.9
 	hashbrown-0.12.3
 	hermit-abi-0.1.19
 	hermit-abi-0.2.6
