@@ -36,6 +36,8 @@ CRATES="
 	fastrand-1.9.0
 	getrandom-0.2.7
 	hashbrown-0.12.3
+	hermit-abi-0.1.19
+	hermit-abi-0.2.6
 	hermit-abi-0.3.1
 	indexmap-1.9.3
 	instant-0.1.12
@@ -60,6 +62,7 @@ CRATES="
 	quote-1.0.26
 	rayon-1.7.0
 	rayon-core-1.11.0
+	redox_syscall-0.2.16
 	redox_syscall-0.3.5
 	redox_users-0.4.3
 	regex-1.8.1
@@ -91,14 +94,23 @@ CRATES="
 	winapi-i686-pc-windows-gnu-0.4.0
 	winapi-util-0.1.5
 	winapi-x86_64-pc-windows-gnu-0.4.0
+	windows-sys-0.45.0
 	windows-sys-0.48.0
+	windows-targets-0.42.2
 	windows-targets-0.48.0
 	windows_aarch64_gnullvm-0.42.2
+	windows_aarch64_gnullvm-0.48.0
 	windows_aarch64_msvc-0.42.2
+	windows_aarch64_msvc-0.48.0
+	windows_i686_gnu-0.42.2
 	windows_i686_gnu-0.48.0
+	windows_i686_msvc-0.42.2
 	windows_i686_msvc-0.48.0
+	windows_x86_64_gnu-0.42.2
 	windows_x86_64_gnu-0.48.0
+	windows_x86_64_gnullvm-0.42.2
 	windows_x86_64_gnullvm-0.48.0
+	windows_x86_64_msvc-0.42.2
 	windows_x86_64_msvc-0.48.0
 "
 
