@@ -70,7 +70,6 @@ RDEPEND="
 		>=x11-libs/gtk+-3.10
 		dev-libs/dbus-glib
 		dev-libs/glib:2
-		dev-libs/libgudev:=
 		x11-libs/cairo
 		x11-libs/gdk-pixbuf:2
 		x11-libs/libnotify
