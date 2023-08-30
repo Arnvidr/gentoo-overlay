@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="7"
+EAPI="8"
 
 MY_PN="Rainlendar-Lite"
 MY_P=${MY_PN}-${PV}
 DESCRIPTION="Feature rich calendar application that is easy to use and doesn't take much space on your desktop."
-HOMEPAGE="http://www.rainlendar.net"
-SRC_URI="http://www.rainlendar.net/download/${MY_P}-amd64.tar.bz2"
+HOMEPAGE="https://www.rainlendar.net"
+SRC_URI="https://www.rainlendar.net/download/${PV}/${MY_P}-amd64.tar.bz2"
 
 LICENSE="as-is"
 SLOT="0"
