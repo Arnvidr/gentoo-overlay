@@ -83,6 +83,7 @@ src_install() {
 }
 
 pkg_postinst() {
+	xdg_icon_cache_update
 	if [[ -z ${REPLACING_VERSIONS} ]]; then
 		ewarn "Don't forget to disable transcoding engines for software"
 		ewarn "that you don't have installed (such as having the ffmpeg"
@@ -90,4 +91,8 @@ pkg_postinst() {
 	elif use multiuser; then
 		ewarn "Remember to refresh the files in ~/.config/UMS/"
 	fi
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
 }
