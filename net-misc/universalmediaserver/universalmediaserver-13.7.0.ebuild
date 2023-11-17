@@ -16,7 +16,7 @@ SRC_URI="https://github.com/UniversalMediaServer/UniversalMediaServer/releases/d
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+dcraw +ffmpeg +libmediainfo +libzen +mplayer multiuser +vlc"
+IUSE="+dcraw +ffmpeg +libmediainfo +libzen multiuser +vlc"
 
 DEPEND="app-arch/unzip"
 RDEPEND=">=virtual/jre-17
@@ -24,7 +24,6 @@ RDEPEND=">=virtual/jre-17
 	ffmpeg? ( media-video/ffmpeg[encode] )
 	libmediainfo? ( media-libs/libmediainfo )
 	libzen? ( media-libs/libzen )
-	mplayer? ( media-video/mplayer[encode] )
 	vlc? ( media-video/vlc[encode] ) "
 
 S=${WORKDIR}/ums-${PV}
