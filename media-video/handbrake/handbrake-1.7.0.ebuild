@@ -4,7 +4,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..11} )
+PYTHON_COMPAT=( python3_{8..12} )
 
 inherit autotools python-any-r1 toolchain-funcs xdg
 
@@ -32,26 +32,18 @@ RDEPEND="
 	dev-libs/fribidi
 	dev-libs/jansson:=
 	dev-libs/libxml2
-	media-libs/a52dec
-	>=media-libs/dav1d-0.5.1:=
-	media-libs/freetype
 	media-libs/harfbuzz
 	media-libs/libass:=
-	>=media-libs/libbluray-1.0:=
-	media-libs/libdvdnav
-	media-libs/libdvdread:=
 	media-libs/libjpeg-turbo:=
-	media-libs/libmkv
 	media-libs/libogg
+	media-libs/libsamplerate
 	media-libs/libtheora
 	media-libs/libvorbis
-	>=media-libs/libvpx-1.8:=
+	>=media-libs/libvpx-1.12.0:=
 	media-libs/opus
 	media-libs/speex
 	media-libs/x264:=
-	media-libs/zimg
 	media-sound/lame
-	>=media-video/ffmpeg-4.2.1:0=[postproc,fdk?]
 	sys-libs/zlib
 	fdk? ( media-libs/fdk-aac:= )
 	gstreamer? (
@@ -69,7 +61,6 @@ RDEPEND="
 		>=x11-libs/gtk+-3.10
 		dev-libs/dbus-glib
 		dev-libs/glib:2
-		dev-libs/libgudev:=
 		x11-libs/cairo
 		x11-libs/gdk-pixbuf:2
 		x11-libs/libnotify
@@ -83,15 +74,6 @@ DEPEND="${RDEPEND}
 	dev-lang/yasm
 	dev-util/intltool
 "
-
-PATCHES=(
-	# Fix missing flags
-	"${FILESDIR}/${P}-missing-linker-flags.patch"
-	"${FILESDIR}/${P}-missing-linker-flags-cli.patch"
-	"${FILESDIR}/${P}-missing-linker-flags-test.patch"
-	"${FILESDIR}/${P}-ignore-autoconf-check.patch"
-	"${FILESDIR}/${P}-ffmpeg-5.0.patch"
-)
 
 src_prepare() {
 	default
