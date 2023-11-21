@@ -36,7 +36,7 @@ src_prepare() {
 
 	sed -i -e 's/initialize/none/g' pom.xml || die -n "Failed to patch pom.xml"
 
-	mvn package -P linux-x86_64 -DskipTests || die -n "Failed to package release"
+	JAVA_HOME=/usr/lib/jvm/openjdk-17 mvn package -P linux-x86_64 -DskipTests || die -n "Failed to package release"
 
 	if use multiuser; then
 		cat > ${PN} <<-EOF
