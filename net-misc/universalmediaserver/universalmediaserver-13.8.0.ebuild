@@ -35,7 +35,6 @@ src_prepare() {
 	default
 
 	sed -i -e 's/initialize/none/g' pom.xml || die -n "Failed to patch pom.xml"
-	sed -i -e 's/<project.jre-version>17</<project.jre-version>openjdk-17</g' pom.xml || die -n "Failed to patch pom.xml"
 
 	mvn package -P linux-x86_64 -DskipTests || die -n "Failed to package release"
 
