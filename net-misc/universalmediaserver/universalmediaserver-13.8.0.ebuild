@@ -7,11 +7,10 @@
 
 EAPI="8"
 
-inherit desktop java-pkg-2
+inherit desktop xdg-utils java-pkg-2
 
 DESCRIPTION="Universal Media Server is a DLNA-compliant UPnP Media Server."
 HOMEPAGE="http://www.universalmediaserver.com/"
-#SRC_URI="https://github.com/UniversalMediaServer/UniversalMediaServer/releases/download/${PV}/UMS-${PV}-x86_64.tgz -> ${P}.tar.gz"
 SRC_URI="https://github.com/UniversalMediaServer/UniversalMediaServer/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
