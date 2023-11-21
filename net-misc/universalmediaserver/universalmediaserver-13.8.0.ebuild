@@ -28,7 +28,7 @@ RDEPEND=">=virtual/jre-17
 	libzen? ( media-libs/libzen )
 	vlc? ( media-video/vlc[encode] ) "
 
-S=${WORKDIR}/ums-${PV}
+S=${WORKDIR}/UniversalMediaServer-${PV}
 UMS_HOME=/opt/${PN}
 
 src_prepare() {
