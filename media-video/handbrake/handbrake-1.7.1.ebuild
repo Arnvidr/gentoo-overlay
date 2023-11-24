@@ -99,7 +99,6 @@ src_configure() {
 		--disable-flatpak \
 		--enable-ffmpeg-aac \
 		$(usex fdk --enable-fdk-aac) \
-		$(usex !gtk --disable-gtk) \
 		$(use_enable gtk3 gtk) \
 		$(use_enable gtk4) \
 		$(usex !gstreamer --disable-gst) \
