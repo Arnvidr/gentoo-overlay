@@ -82,6 +82,7 @@ DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	dev-lang/yasm
 	dev-util/intltool
+	dev-util/ninja
 "
 
 src_prepare() {
