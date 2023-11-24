@@ -95,7 +95,6 @@ src_configure() {
 		--force \
 		--verbose \
 		--prefix="${EPREFIX}/usr" \
-		--disable-gtk-update-checks \
 		--disable-flatpak \
 		--enable-ffmpeg-aac \
 		$(usex fdk --enable-fdk-aac) \
