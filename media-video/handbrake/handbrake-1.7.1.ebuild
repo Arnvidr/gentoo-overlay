@@ -38,6 +38,7 @@ RDEPEND="
 	dev-libs/fribidi
 	dev-libs/jansson:=
 	dev-libs/libxml2
+	media-libs/freetype
 	media-libs/harfbuzz
 	media-libs/libass:=
 	media-libs/libjpeg-turbo:=
