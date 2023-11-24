@@ -120,7 +120,7 @@ src_install() {
 pkg_postinst() {
 	einfo "For the CLI version of HandBrake, you can use \`HandBrakeCLI\`."
 
-	if use gtk ; then
+	if use gtk4 ; then
 		einfo ""
 		einfo "For the GTK+ version of HandBrake, you can run \`ghb\`."
 	fi
