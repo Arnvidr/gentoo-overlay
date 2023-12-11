@@ -7,16 +7,17 @@
 
 EAPI="8"
 
-inherit desktop
+inherit desktop xdg-utils java-pkg-2
 
 DESCRIPTION="Universal Media Server is a DLNA-compliant UPnP Media Server."
 HOMEPAGE="http://www.universalmediaserver.com/"
-SRC_URI="https://github.com/UniversalMediaServer/UniversalMediaServer/releases/download/${PV}/UMS-${PV}-x86_64.tgz -> ${P}.tar.gz"
+SRC_URI="https://github.com/UniversalMediaServer/UniversalMediaServer/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+dcraw +ffmpeg +libmediainfo +libzen multiuser +vlc"
+JAVA_PKG_FORCE_VM="openjdk-17"
 
 DEPEND="app-arch/unzip"
 RDEPEND=">=virtual/jre-17
@@ -26,11 +27,15 @@ RDEPEND=">=virtual/jre-17
 	libzen? ( media-libs/libzen )
 	vlc? ( media-video/vlc[encode] ) "
 
-S=${WORKDIR}/ums-${PV}
+S=${WORKDIR}/UniversalMediaServer-${PV}
 UMS_HOME=/opt/${PN}
 
 src_prepare() {
 	default
+
+	sed -i -e 's/initialize/none/g' pom.xml || die -n "Failed to patch pom.xml"
+
+	JAVA_HOME=/usr/lib/jvm/openjdk-17 mvn package -P linux-x86_64 -DskipTests || die -n "Failed to package release"
 
 	if use multiuser; then
 		cat > ${PN} <<-EOF
@@ -60,17 +65,17 @@ src_prepare() {
 	Categories=Network;
 	EOF
 
-	unzip -j ums.jar resources/images/icon-{32,256}.png || die -n "failed to extract icons" || return ${?}
+	unzip -j target/ums.jar resources/images/icon-{32,256}.png || die -n "failed to extract icons" || return ${?}
 }
 
 src_install() {
 	dobin ${PN}
 
 	exeinto ${UMS_HOME}
-	doexe UMS.sh
+	doexe src/main/external-resources/UMS.sh
 
 	insinto ${UMS_HOME}
-	doins -r ums.jar *.conf documentation renderers web *.xml
+	doins -r target/ums.jar src/main/external-resources/*.conf src/main/external-resources/documentation src/main/external-resources/renderers src/main/external-resources/web src/main/external-resources/*.xml
 	dodoc CHANGELOG.md README.md
 
 	newicon -s 32 icon-32.png ${PN}.png
