@@ -4,7 +4,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..11} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit autotools python-any-r1 toolchain-funcs xdg
 
@@ -25,34 +25,32 @@ HOMEPAGE="http://handbrake.fr/"
 LICENSE="GPL-2"
 
 SLOT="0"
-IUSE="+fdk gstreamer gtk numa x265"
+IUSE="dolby +fdk gstreamer gtk3 gtk4 numa nvenc x265"
+
+REQUIRED_USE="
+	numa? ( x265 )
+	gtk3? ( !gtk4 )
+	gtk4? ( !gtk3 )
+"
 
 RDEPEND="
 	app-arch/xz-utils
 	dev-libs/fribidi
 	dev-libs/jansson:=
 	dev-libs/libxml2
-	media-libs/a52dec
-	>=media-libs/dav1d-1.0.0:=
 	media-libs/freetype
 	media-libs/harfbuzz
 	media-libs/libass:=
-	>=media-libs/libbluray-1.3.4:=
-	media-libs/libdvdnav
-	media-libs/libdvdread:=
 	media-libs/libjpeg-turbo:=
-	media-libs/libmkv
 	media-libs/libogg
+	media-libs/libsamplerate
 	media-libs/libtheora
 	media-libs/libvorbis
 	>=media-libs/libvpx-1.12.0:=
 	media-libs/opus
 	media-libs/speex
-	>=media-libs/svt-av1-1.4.1
 	media-libs/x264:=
-	media-libs/zimg
 	media-sound/lame
-	>=media-video/ffmpeg-5.1.2:0=[postproc,fdk?]
 	sys-libs/zlib
 	fdk? ( media-libs/fdk-aac:= )
 	gstreamer? (
@@ -66,10 +64,13 @@ RDEPEND="
 		media-plugins/gst-plugins-x264:1.0
 		media-plugins/gst-plugins-gdkpixbuf:1.0
 	)
-	gtk? (
+	gtk4? (
+		>=gui-libs/gtk-4.4
+	)
+	gtk3? (
 		>=x11-libs/gtk+-3.10
 		dev-libs/dbus-glib
-		dev-libs/glib:2
+		>=dev-libs/glib-2.56
 		x11-libs/cairo
 		x11-libs/gdk-pixbuf:2
 		x11-libs/libnotify
@@ -82,23 +83,11 @@ DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	dev-lang/yasm
 	dev-util/intltool
+	dev-util/ninja
 "
-
-# Patches for 1.6.1 not checked yet because of masked ffmpeg 5
-#PATCHES=(
-	# Fix missing flags
-#	"${FILESDIR}/${P}-missing-linker-flags.patch"
-#	"${FILESDIR}/${P}-missing-linker-flags-cli.patch"
-#	"${FILESDIR}/${P}-missing-linker-flags-test.patch"
-#	"${FILESDIR}/${P}-ignore-autoconf-check.patch"
-#	"${FILESDIR}/${P}-ffmpeg-5.0.patch"
-#)
 
 src_prepare() {
 	default
-
-	cd "${S}/gtk" || die
-	eautoreconf
 }
 
 src_configure() {
@@ -108,13 +97,15 @@ src_configure() {
 		--force \
 		--verbose \
 		--prefix="${EPREFIX}/usr" \
-		--disable-gtk-update-checks \
 		--disable-flatpak \
 		--enable-ffmpeg-aac \
 		$(usex fdk --enable-fdk-aac) \
-		$(usex !gtk --disable-gtk) \
+		$(use_enable gtk3 gtk) \
+		$(use_enable gtk4) \
 		$(usex !gstreamer --disable-gst) \
 		$(use_enable numa) \
+		$(use_enable dolby libovi) \
+		$(use_enable nvenc) \
 		$(use_enable x265) || die "Configure failed."
 }
 
@@ -131,7 +122,7 @@ src_install() {
 pkg_postinst() {
 	einfo "For the CLI version of HandBrake, you can use \`HandBrakeCLI\`."
 
-	if use gtk ; then
+	if use gtk4 ; then
 		einfo ""
 		einfo "For the GTK+ version of HandBrake, you can run \`ghb\`."
 	fi
