@@ -19,8 +19,8 @@ RESTRICT="bindist mirror splitdebug"
 IUSE=""
 QA_PREBUILT="opt/${P}/*"
 RDEPEND="
+	dev-debug/lldb
 	dev-libs/libdbusmenu
-	dev-util/lldb
 	media-libs/mesa[X(+)]
 	x11-libs/libX11
 	x11-libs/libXcomposite
