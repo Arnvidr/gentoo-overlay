@@ -53,7 +53,7 @@ src_install() {
 	newicon --size 128 .install4j/i4j_extf_8_1bd0g0g_10k6n0b.png ${PN}.png
 	newicon --size 256 .install4j/i4j_extf_8_1bd0g0g_10k6n0b@2x.png ${PN}.png
 
-	make_desktop_entry ${PN} "DbVisualizer ${PV}" ${PN} "Development;Database" 
+	make_desktop_entry ${PN} "DbVisualizer ${PV}" ${PN} "Development;Database"
 }
 
 pkg_postinst() {
