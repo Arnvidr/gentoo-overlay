@@ -16,7 +16,6 @@ SLOT="0"
 VER="$(ver_cut 1-2)"
 KEYWORDS="~amd64"
 RESTRICT="bindist mirror splitdebug"
-IUSE=""
 QA_PREBUILT="opt/${P}/*"
 RDEPEND="
 	dev-debug/lldb
@@ -38,19 +37,30 @@ SRC_URI_PATH="idea"
 SRC_URI_PN="ideaIU"
 SRC_URI="https://download.jetbrains.com/${SRC_URI_PATH}/${SRC_URI_PN}-${PV}.tar.gz -> ${P}.tar.gz"
 
-BUILD_NUMBER="233.13135.103"
+BUILD_NUMBER="233.14015.106"
 S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
+
+src_prepare() {
+	default
+
+	rm -rv ./lib/async-profiler/aarch64 || die
+	rm -rv ./plugins/cwm-plugin/quiche-native/linux-aarch64 || die
+}
 
 src_install() {
 	local dir="/opt/${P}"
 
 	insinto "${dir}"
 	doins -r *
-	fperms 755 "${dir}"/bin/{"${MY_PN}",format,inspect,ltedit,remote-dev-server}.sh
-	fperms 755 "${dir}"/bin/fsnotifier
+	fperms 755 "${dir}"/bin/{"${MY_PN}",format,inspect,jetbrains_client,ltedit,remote-dev-server}.sh
+	fperms 755 "${dir}"/bin/{fsnotifier,repair,restarter}
 
 	fperms 755 "${dir}"/jbr/bin/{java,javac,javadoc,jcmd,jdb,jfr,jhsdb,jinfo,jmap,jps,jrunscript,jstack,jstat,keytool,rmiregistry,serialver}
 	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
+
+	fperms 755 "${dir}"/plugins/javascript-impl/helpers/package-version-range-matcher/node_modules/semver/bin/semver.js
+	fperms 755 "${dir}"/plugins/maven/lib/maven3/bin/{mvn,mvnDebug,mvnyjp}
+	fperms 755 "${dir}"/plugins/tailwindcss/server/tailwindcss-language-server
 
 	make_wrapper "${PN}" "${dir}"/bin/"${MY_PN}".sh
 	newicon bin/"${MY_PN}".svg "${PN}".svg
