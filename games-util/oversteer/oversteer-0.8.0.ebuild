@@ -21,7 +21,7 @@ RESTRICT="mirror"
 SLOT="0"
 
 DEPEND="dev-python/matplotlib
-	dev-python/python-evdev
+	dev-python/evdev
 	dev-python/pyudev
 	dev-python/scipy
 	virtual/libudev"
