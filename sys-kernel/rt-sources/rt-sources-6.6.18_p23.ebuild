@@ -12,7 +12,7 @@ CKV="$(ver_cut 1-3)"
 K_SECURITY_UNSUPPORTED="1"
 # Find genpatches version at https://gitweb.gentoo.org/proj/linux-patches.git
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="13"
+K_GENPATCHES_VER="24"
 K_DEBLOB_AVAILABLE="1"
 RT_PATCHSET="${PV/*_p}"
 
