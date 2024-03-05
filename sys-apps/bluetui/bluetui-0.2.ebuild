@@ -15,7 +15,7 @@ CRATES="
 	backtrace@0.3.69
 	bitflags@1.3.2
 	bitflags@2.4.2
-	bluer@0.17.0
+	bluer@0.16.1
 	bytes@1.5.0
 	cassowary@0.3.0
 	castaway@0.2.2
