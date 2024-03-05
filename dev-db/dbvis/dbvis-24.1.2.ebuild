@@ -18,7 +18,7 @@ HOMEPAGE="https://www.dbvis.com/"
 SRC_URI="https://www.dbvis.com/product_download/${P}/media/${At}"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="amd64"
 LICENSE="Apache-1.1"
 RESTRICT="mirror"
 

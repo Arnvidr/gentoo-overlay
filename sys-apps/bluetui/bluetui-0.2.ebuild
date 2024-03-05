@@ -15,7 +15,7 @@ CRATES="
 	backtrace@0.3.69
 	bitflags@1.3.2
 	bitflags@2.4.2
-	bluer@0.16.1
+	bluer@0.17.0
 	bytes@1.5.0
 	cassowary@0.3.0
 	castaway@0.2.2
@@ -155,7 +155,7 @@ SRC_URI+=" ${CARGO_CRATE_URIS}"
 # use cargo-license for a more accurate license picture
 LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD-2 Boost-1.0 GPL-3 MIT Unicode-DFS-2016 Unlicense ZLIB"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 DEPEND=""
 RDEPEND="${DEPEND}"

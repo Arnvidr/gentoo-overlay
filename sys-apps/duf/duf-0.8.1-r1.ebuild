@@ -28,7 +28,7 @@ else
         go-module_live_vendor
     }
 
-    KEYWORDS="~amd64 ~x86 ~arm64 ~arm"
+    KEYWORDS="amd64"
 fi
 
 DESCRIPTION="Disk Usage/Free Utility - a better 'df' alternative"

@@ -111,7 +111,7 @@ SRC_URI+=" $(cargo_crate_uris)"
 
 LICENSE="Apache-2.0 BSD MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64"
 # Prevent portage from trying to fetch bunch of *.crate from mirror despite they are not mirrored.
 #
 # Specifying `test` to ignore failing tests.
