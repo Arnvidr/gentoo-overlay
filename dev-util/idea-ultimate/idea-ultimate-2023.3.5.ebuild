@@ -14,7 +14,7 @@ LICENSE="
 "
 SLOT="0"
 VER="$(ver_cut 1-2)"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 RESTRICT="bindist mirror splitdebug"
 QA_PREBUILT="opt/${P}/*"
 RDEPEND="
@@ -37,7 +37,7 @@ SRC_URI_PATH="idea"
 SRC_URI_PN="ideaIU"
 SRC_URI="https://download.jetbrains.com/${SRC_URI_PATH}/${SRC_URI_PN}-${PV}.tar.gz -> ${P}.tar.gz"
 
-BUILD_NUMBER="233.14015.106"
+BUILD_NUMBER="233.14808.21"
 S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
 
 src_prepare() {
