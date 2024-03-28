@@ -21,7 +21,7 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	dev-util/cmake"
+	dev-build/cmake"
 
 src_configure() {
 	PREFIX=/usr/lib/lv2
