@@ -5,6 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{10..12} )
 PYTHON_REQ_USE="xml(+)"
+DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=""
 
 inherit distutils-r1 xdg
