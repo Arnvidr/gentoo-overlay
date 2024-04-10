@@ -44,7 +44,7 @@ src_prepare() {
 	default
 
 	rm -rv ./lib/async-profiler/aarch64 || die
-	rm -rv ./plugins/cwm-plugin/quiche-native/linux-aarch64 || die
+#	rm -rv ./plugins/cwm-plugin/quiche-native/linux-aarch64 || die
 }
 
 src_install() {
