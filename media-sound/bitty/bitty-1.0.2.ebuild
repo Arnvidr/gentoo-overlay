@@ -16,8 +16,6 @@ KEYWORDS="-* ~amd64"
 RESTRICT="bindist mirror fetch strip"
 
 src_unpack() {
-	#default
-	#cd "${S}" || die
 	unpack_deb "${A}"
 }
 
@@ -26,3 +24,12 @@ src_install() {
 
 	dosym -r "/opt/Bitty/${PN}" "/usr/bin/${PN}"
 }
+
+pkg_postinst() {
+        xdg_icon_cache_update
+}
+
+pkg_postrm() {
+        xdg_icon_cache_update
+}
+
