@@ -20,6 +20,8 @@ src_unpack() {
 }
 
 src_install() {
+	mv "/usr/share/doc/${PN}" "/usr/share/doc/${P}"
+
 	cp -r . "${ED}" || die
 
 	dosym -r "/opt/Bitty/${PN}" "/usr/bin/${PN}"
