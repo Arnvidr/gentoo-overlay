@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit unpacker
+inherit unpacker xdg
 
 DESCRIPTION="Bitty admin program"
 HOMEPAGE="https://www.curioussoundobjects.com/"
@@ -28,10 +28,10 @@ src_install() {
 }
 
 pkg_postinst() {
-        xdg_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-        xdg_icon_cache_update
+	xdg_icon_cache_update
 }
 
