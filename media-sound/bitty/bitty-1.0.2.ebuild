@@ -20,3 +20,9 @@ src_unpack() {
 	#cd "${S}" || die
 	unpack_deb "${A}"
 }
+
+src_install() {
+	cp -r . "${ED}" || die
+
+	dosym -r "/opt/Bitty/${PN}" "/usr/bin/${PN}"
+}
