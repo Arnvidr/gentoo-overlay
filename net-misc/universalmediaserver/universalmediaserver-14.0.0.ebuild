@@ -65,7 +65,7 @@ src_prepare() {
 	Categories=Network;
 	EOF
 
-	unzip -j target/ums.jar resources/images/icon-{32,256}.png || die -n "failed to extract icons" || return ${?}
+	unzip -j target/ums.jar resources/images/icon-{32,128}.png || die -n "failed to extract icons" || return ${?}
 }
 
 src_install() {
@@ -79,7 +79,7 @@ src_install() {
 	dodoc CHANGELOG.md README.md
 
 	newicon -s 32 icon-32.png ${PN}.png
-	newicon -s 256 icon-256.png ${PN}.png
+	newicon -s 128 icon-128.png ${PN}.png
 
 	domenu ${PN}.desktop
 
