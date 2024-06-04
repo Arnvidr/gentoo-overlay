@@ -86,8 +86,6 @@ src_prepare() {
 }
 
 src_configure() {
-	replace-flags -std=c++11 -std=c++17
-
 	local myeconfargs=(
 		$(use_enable inotify)
 		$(use_with libuv)
@@ -104,6 +102,8 @@ src_configure() {
 		--with-gtest="${EPREFIX}/usr"
 	)
 	econf "${myeconfargs[@]}"
+
+	replace-flags -std=c++11 -std=c++17
 }
 
 src_test() {
