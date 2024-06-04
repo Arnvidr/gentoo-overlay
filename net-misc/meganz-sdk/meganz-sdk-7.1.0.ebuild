@@ -86,8 +86,9 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cxxflags -std=c++17
+
 	local myeconfargs=(
-		"-DCMAKE_CXX_FLAGS_INIT=-std=c++17"
 		$(use_enable inotify)
 		$(use_with libuv)
 		$(use_with sqlite)
