@@ -86,7 +86,7 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cxxflags -std=c++17
+	replace-flags -std=c++11 -std=c++17
 
 	local myeconfargs=(
 		$(use_enable inotify)
