@@ -1,0 +1,13 @@
+diff --git a/source/network/NetServer.cpp b/source/network/NetServer.cpp
+index 547f551..c82b13c 100644
+--- a/source/network/NetServer.cpp
++++ b/source/network/NetServer.cpp
+@@ -302,7 +302,7 @@ void CNetServerWorker::SetupUPnP()
+ 	else if ((devlist = upnpDiscover(10000, 0, 0, 0, 0, 0)) != NULL)
+ #endif
+ 	{
+-		ret = UPNP_GetValidIGD(devlist, &urls, &data, internalIPAddress, sizeof(internalIPAddress));
++		ret = UPNP_GetValidIGD(devlist, &urls, &data, internalIPAddress, sizeof(internalIPAddress), NULL, NULL);
+ 		allocatedUrls = ret != 0; // urls is allocated on non-zero return values
+ 	}
+ 	else
