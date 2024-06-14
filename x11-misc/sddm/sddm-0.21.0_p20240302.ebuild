@@ -1,25 +1,29 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+PAM_TAR="${PN}-0.21.0-pam"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 else
-	SRC_URI="https://github.com/${PN}/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
+	COMMIT=ae072f901671b68861da9577e3e12e350a9053d5
+	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${COMMIT}"
+	KEYWORDS="~amd64"
 fi
 
-QTMIN=5.15.2
-inherit cmake linux-info optfeature systemd tmpfiles
+QTMIN=6.7.1
+inherit cmake linux-info pam systemd tmpfiles
 
 DESCRIPTION="Simple Desktop Display Manager"
 HOMEPAGE="https://github.com/sddm/sddm"
+SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PAM_TAR}.tar.xz"
 
 LICENSE="GPL-2+ MIT CC-BY-3.0 CC-BY-SA-3.0 public-domain"
 SLOT="0"
-IUSE="+elogind systemd test"
+IUSE="+elogind systemd test +X"
 
 REQUIRED_USE="^^ ( elogind systemd )"
 RESTRICT="!test? ( test )"
@@ -27,11 +31,8 @@ RESTRICT="!test? ( test )"
 COMMON_DEPEND="
 	acct-group/sddm
 	acct-user/sddm
-	>=dev-qt/qtcore-${QTMIN}:5
-	>=dev-qt/qtdbus-${QTMIN}:5
-	>=dev-qt/qtdeclarative-${QTMIN}:5
-	>=dev-qt/qtgui-${QTMIN}:5
-	>=dev-qt/qtnetwork-${QTMIN}:5
+	>=dev-qt/qtbase-${QTMIN}:6[dbus,gui,network]
+	>=dev-qt/qtdeclarative-${QTMIN}:6
 	sys-libs/pam
 	x11-libs/libXau
 	x11-libs/libxcb:=
@@ -39,32 +40,34 @@ COMMON_DEPEND="
 	systemd? ( sys-apps/systemd:=[pam] )
 "
 DEPEND="${COMMON_DEPEND}
-	test? ( >=dev-qt/qttest-${QTMIN}:5 )
+	test? ( >=dev-qt/qtbase-${QTMIN}:6[network,test] )
 "
 RDEPEND="${COMMON_DEPEND}
-	x11-base/xorg-server
+	X? ( x11-base/xorg-server )
 	!systemd? ( gui-libs/display-manager-init )
 "
 BDEPEND="
 	dev-python/docutils
-	>=dev-qt/linguist-tools-${QTMIN}:5
-	kde-frameworks/extra-cmake-modules:5
+	>=dev-build/cmake-3.25.0
+	>=dev-qt/qttools-${QTMIN}[linguist]
+	kde-frameworks/extra-cmake-modules:0
 	virtual/pkgconfig
 "
 
 PATCHES=(
 	# Downstream patches
-	"${FILESDIR}/${P}-respect-user-flags.patch"
-	"${FILESDIR}/${PN}-0.18.1-Xsession.patch" # bug 611210
-	"${FILESDIR}/${P}-sddm.pam-use-substack.patch" # bug 728550
-	"${FILESDIR}/${P}-disable-etc-debian-check.patch"
-	"${FILESDIR}/${P}-no-default-pam_systemd-module.patch" # bug 669980
-	"${FILESDIR}/${P}-fix-use-development-sessions.patch" # git master
+	"${FILESDIR}/${PN}-0.20.0-respect-user-flags.patch"
+	"${FILESDIR}/${PN}-0.21.0-Xsession.patch" # bug 611210
 )
 
 pkg_setup() {
 	local CONFIG_CHECK="~DRM"
 	use kernel_linux && linux-info_pkg_setup
+}
+
+src_unpack() {
+	[[ ${PV} == *9999* ]] && git-r3_src_unpack
+	default
 }
 
 src_prepare() {
@@ -82,11 +85,17 @@ EOF
 		sed -e "/^find_package/s/ Test//" -i CMakeLists.txt || die
 		cmake_comment_add_subdirectory test
 	fi
+
+	if use systemd; then
+		sed -e "/pam_elogind.so/s/elogind/systemd/" \
+			-i "${WORKDIR}"/${PAM_TAR}/${PN}-greeter.pam || die
+	fi
 }
 
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_MAN_PAGES=ON
+		-DBUILD_WITH_QT6=ON
 		-DDBUS_CONFIG_FILENAME="org.freedesktop.sddm.conf"
 		-DRUNTIME_DIR=/run/sddm
 		-DSYSTEMD_TMPFILES_DIR="/usr/lib/tmpfiles.d"
@@ -101,6 +110,16 @@ src_install() {
 
 	insinto /etc/sddm.conf.d/
 	doins "${S}"/01gentoo.conf
+
+	# with systemd logs are sent to journald, so no point to bother in that case
+	if ! use systemd; then
+		insinto /etc/logrotate.d
+		newins "${FILESDIR}/sddm.logrotate" sddm
+	fi
+
+	newpamd "${WORKDIR}"/${PAM_TAR}/${PN}.pam ${PN}
+	newpamd "${WORKDIR}"/${PAM_TAR}/${PN}-autologin.pam ${PN}-autologin
+	newpamd "${WORKDIR}"/${PAM_TAR}/${PN}-greeter.pam ${PN}-greeter
 }
 
 pkg_postinst() {
@@ -123,9 +142,6 @@ pkg_postinst() {
 		elog "  Nvidia GPU owners in particular should pay attention"
 		elog "  to the troubleshooting section."
 	fi
-
-	optfeature "Weston DisplayServer support (EXPERIMENTAL)" dev-libs/weston
-	optfeature "KWin DisplayServer support (EXPERIMENTAL)" kde-plasma/kwin
 
 	systemd_reenable sddm.service
 }
