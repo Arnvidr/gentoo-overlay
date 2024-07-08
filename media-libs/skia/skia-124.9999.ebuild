@@ -9,6 +9,7 @@ if [[ -z ${PV%%*9999} ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/google/${PN}.git"
 	EGIT_BRANCH="chrome/m$(ver_cut 1)"
+	KEYWORDS="~amd64"
 else
 	MY_PV="1195e70"
 	SRC_URI="
