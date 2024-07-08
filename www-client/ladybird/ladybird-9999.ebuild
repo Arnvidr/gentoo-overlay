@@ -117,7 +117,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DENABLE_QT=True
 		-DBUILD_TESTING="$(usex test True False)"
-		-DENABLE_NETWORK_DOWNLOADS=False
+		-DENABLE_NETWORK_DOWNLOADS=True
 	)
 
 	cmake_src_configure
