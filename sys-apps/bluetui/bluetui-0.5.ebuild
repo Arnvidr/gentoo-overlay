@@ -6,38 +6,53 @@
 EAPI=8
 
 CRATES="
-	addr2line@0.21.0
+	addr2line@0.22.0
 	adler@1.0.2
-	ahash@0.8.9
-	allocator-api2@0.2.16
-	async-channel@2.2.0
-	autocfg@1.1.0
-	backtrace@0.3.69
-	bitflags@1.3.2
-	bitflags@2.4.2
-	bluer@0.17.0
-	bytes@1.5.0
+	ahash@0.8.11
+	allocator-api2@0.2.18
+	anstream@0.6.14
+	anstyle@1.0.7
+	anstyle-parse@0.2.4
+	anstyle-query@1.1.0
+	anstyle-wincon@3.0.3
+	async-channel@2.3.1
+	autocfg@1.3.0
+	backtrace@0.3.73
+	bitflags@2.6.0
+	bluer@0.17.2
+	bytes@1.6.0
 	cassowary@0.3.0
-	castaway@0.2.2
-	cc@1.0.87
+	castaway@0.2.3
+	cc@1.1.0
 	cfg-if@1.0.0
+	cfg_aliases@0.1.1
+	cfg_aliases@0.2.1
+	clap@4.5.9
+	clap_builder@4.5.9
+	clap_derive@4.5.8
+	clap_lex@0.7.1
+	colorchoice@1.0.1
 	compact_str@0.7.1
-	concurrent-queue@2.4.0
-	crossbeam-utils@0.8.19
+	concurrent-queue@2.5.0
+	coolor@0.9.0
+	crossbeam-utils@0.8.20
 	crossterm@0.27.0
 	crossterm_winapi@0.9.1
 	custom_debug@0.6.1
 	custom_debug_derive@0.6.1
-	darling@0.20.8
-	darling_core@0.20.8
-	darling_macro@0.20.8
+	darling@0.20.10
+	darling_core@0.20.10
+	darling_macro@0.20.10
 	dbus@0.9.7
 	dbus-crossroads@0.5.2
 	dbus-tokio@0.7.6
-	displaydoc@0.2.4
-	either@1.10.0
-	event-listener@5.1.0
-	event-listener-strategy@0.5.0
+	dirs@5.0.1
+	dirs-sys@0.4.1
+	displaydoc@0.2.5
+	either@1.13.0
+	equivalent@1.0.1
+	event-listener@5.3.1
+	event-listener-strategy@0.5.2
 	fnv@1.0.7
 	futures@0.3.30
 	futures-channel@0.3.30
@@ -48,73 +63,88 @@ CRATES="
 	futures-sink@0.3.30
 	futures-task@0.3.30
 	futures-util@0.3.30
-	getrandom@0.2.12
-	gimli@0.28.1
-	hashbrown@0.14.3
-	heck@0.4.1
-	hermit-abi@0.3.6
+	getrandom@0.2.15
+	gimli@0.29.0
+	hashbrown@0.14.5
+	heck@0.5.0
+	hermit-abi@0.3.9
 	hex@0.4.3
 	ident_case@1.0.1
-	indoc@2.0.4
+	indexmap@2.2.6
+	is_terminal_polyfill@1.70.0
 	itertools@0.12.1
-	itoa@1.0.10
-	lazy_static@1.4.0
-	libc@0.2.153
+	itertools@0.13.0
+	itoa@1.0.11
+	lazy_static@1.5.0
+	libc@0.2.155
 	libdbus-sys@0.2.5
-	lock_api@0.4.11
-	log@0.4.20
+	libredox@0.1.3
+	lock_api@0.4.12
+	log@0.4.22
 	lru@0.12.3
 	macaddr@1.0.1
-	memchr@2.7.1
-	miniz_oxide@0.7.2
-	mio@0.8.10
-	nix@0.27.1
+	memchr@2.7.4
+	miniz_oxide@0.7.4
+	mio@0.8.11
+	nix@0.28.0
+	nix@0.29.0
 	num-derive@0.4.2
-	num-traits@0.2.18
+	num-traits@0.2.19
 	num_cpus@1.16.0
-	object@0.32.2
+	object@0.36.1
 	once_cell@1.19.0
+	option-ext@0.2.0
 	parking@2.2.0
-	parking_lot@0.12.1
-	parking_lot_core@0.9.9
-	paste@1.0.14
-	pin-project@1.1.4
-	pin-project-internal@1.1.4
-	pin-project-lite@0.2.13
+	parking_lot@0.12.3
+	parking_lot_core@0.9.10
+	paste@1.0.15
+	pin-project@1.1.5
+	pin-project-internal@1.1.5
+	pin-project-lite@0.2.14
 	pin-utils@0.1.0
 	pkg-config@0.3.30
-	proc-macro2@1.0.78
-	quote@1.0.35
-	ratatui@0.26.1
-	redox_syscall@0.4.1
-	rustc-demangle@0.1.23
-	rustversion@1.0.14
-	ryu@1.0.17
+	proc-macro2@1.0.86
+	quote@1.0.36
+	ratatui@0.27.0
+	redox_syscall@0.5.2
+	redox_users@0.4.5
+	rustc-demangle@0.1.24
+	rustversion@1.0.17
+	ryu@1.0.18
 	scopeguard@1.2.0
-	serde@1.0.197
-	serde_derive@1.0.197
-	serde_json@1.0.114
+	serde@1.0.204
+	serde_derive@1.0.204
+	serde_json@1.0.120
+	serde_spanned@0.6.6
 	signal-hook@0.3.17
 	signal-hook-mio@0.2.3
-	signal-hook-registry@1.4.1
+	signal-hook-registry@1.4.2
 	slab@0.4.9
-	smallvec@1.13.1
-	socket2@0.5.6
-	stability@0.1.1
+	smallvec@1.13.2
+	socket2@0.5.7
+	stability@0.2.1
 	static_assertions@1.1.0
-	strsim@0.10.0
-	strum@0.26.1
-	strum_macros@0.26.1
-	syn@1.0.109
-	syn@2.0.50
+	strsim@0.11.1
+	strum@0.26.3
+	strum_macros@0.26.4
+	syn@2.0.70
 	synstructure@0.13.1
-	tokio@1.36.0
-	tokio-macros@2.2.0
-	tokio-stream@0.1.14
+	terminal-light@1.4.0
+	thiserror@1.0.61
+	thiserror-impl@1.0.61
+	tokio@1.38.0
+	tokio-macros@2.3.0
+	tokio-stream@0.1.15
+	toml@0.8.14
+	toml_datetime@0.6.6
+	toml_edit@0.22.15
+	tui-input@0.9.0
 	unicode-ident@1.0.12
 	unicode-segmentation@1.11.0
-	unicode-width@0.1.11
-	uuid@1.7.0
+	unicode-truncate@1.1.0
+	unicode-width@0.1.13
+	utf8parse@0.2.2
+	uuid@1.10.0
 	version_check@0.9.4
 	wasi@0.11.0+wasi-snapshot-preview1
 	winapi@0.3.9
@@ -123,23 +153,25 @@ CRATES="
 	windows-sys@0.48.0
 	windows-sys@0.52.0
 	windows-targets@0.48.5
-	windows-targets@0.52.3
+	windows-targets@0.52.6
 	windows_aarch64_gnullvm@0.48.5
-	windows_aarch64_gnullvm@0.52.3
+	windows_aarch64_gnullvm@0.52.6
 	windows_aarch64_msvc@0.48.5
-	windows_aarch64_msvc@0.52.3
+	windows_aarch64_msvc@0.52.6
 	windows_i686_gnu@0.48.5
-	windows_i686_gnu@0.52.3
+	windows_i686_gnu@0.52.6
 	windows_i686_msvc@0.48.5
-	windows_i686_msvc@0.52.3
+	windows_i686_msvc@0.52.6
 	windows_x86_64_gnu@0.48.5
-	windows_x86_64_gnu@0.52.3
+	windows_x86_64_gnu@0.52.6
 	windows_x86_64_gnullvm@0.48.5
-	windows_x86_64_gnullvm@0.52.3
+	windows_x86_64_gnullvm@0.52.6
 	windows_x86_64_msvc@0.48.5
-	windows_x86_64_msvc@0.52.3
-	zerocopy@0.7.32
-	zerocopy-derive@0.7.32
+	windows_x86_64_msvc@0.52.6
+	winnow@0.6.13
+	xterm-query@0.4.0
+	zerocopy@0.7.35
+	zerocopy-derive@0.7.35
 "
 
 inherit cargo
