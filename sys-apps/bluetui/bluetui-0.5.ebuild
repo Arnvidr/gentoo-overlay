@@ -160,6 +160,7 @@ CRATES="
 	windows_aarch64_msvc@0.52.6
 	windows_i686_gnu@0.48.5
 	windows_i686_gnu@0.52.6
+	windows_i686_gnullvm@0.52.6
 	windows_i686_msvc@0.48.5
 	windows_i686_msvc@0.52.6
 	windows_x86_64_gnu@0.48.5
