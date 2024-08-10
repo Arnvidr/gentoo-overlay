@@ -10,28 +10,27 @@ CRATES="
 	adler@1.0.2
 	ahash@0.8.11
 	allocator-api2@0.2.18
-	anstream@0.6.14
-	anstyle@1.0.7
-	anstyle-parse@0.2.4
-	anstyle-query@1.1.0
-	anstyle-wincon@3.0.3
+	anstream@0.6.15
+	anstyle@1.0.8
+	anstyle-parse@0.2.5
+	anstyle-query@1.1.1
+	anstyle-wincon@3.0.4
 	async-channel@2.3.1
 	autocfg@1.3.0
 	backtrace@0.3.73
 	bitflags@2.6.0
-	bluer@0.17.2
-	bytes@1.6.0
+	bluer@0.17.3
+	bytes@1.6.1
 	cassowary@0.3.0
 	castaway@0.2.3
-	cc@1.1.0
+	cc@1.1.7
 	cfg-if@1.0.0
-	cfg_aliases@0.1.1
 	cfg_aliases@0.2.1
-	clap@4.5.9
-	clap_builder@4.5.9
-	clap_derive@4.5.8
-	clap_lex@0.7.1
-	colorchoice@1.0.1
+	clap@4.5.11
+	clap_builder@4.5.11
+	clap_derive@4.5.11
+	clap_lex@0.7.2
+	colorchoice@1.0.2
 	compact_str@0.7.1
 	concurrent-queue@2.5.0
 	coolor@0.9.0
@@ -71,7 +70,7 @@ CRATES="
 	hex@0.4.3
 	ident_case@1.0.1
 	indexmap@2.2.6
-	is_terminal_polyfill@1.70.0
+	is_terminal_polyfill@1.70.1
 	itertools@0.12.1
 	itertools@0.13.0
 	itoa@1.0.11
@@ -86,12 +85,11 @@ CRATES="
 	memchr@2.7.4
 	miniz_oxide@0.7.4
 	mio@0.8.11
-	nix@0.28.0
+	mio@1.0.1
 	nix@0.29.0
 	num-derive@0.4.2
 	num-traits@0.2.19
-	num_cpus@1.16.0
-	object@0.36.1
+	object@0.36.2
 	once_cell@1.19.0
 	option-ext@0.2.0
 	parking@2.2.0
@@ -106,7 +104,7 @@ CRATES="
 	proc-macro2@1.0.86
 	quote@1.0.36
 	ratatui@0.27.0
-	redox_syscall@0.5.2
+	redox_syscall@0.5.3
 	redox_users@0.4.5
 	rustc-demangle@0.1.24
 	rustversion@1.0.17
@@ -114,10 +112,10 @@ CRATES="
 	scopeguard@1.2.0
 	serde@1.0.204
 	serde_derive@1.0.204
-	serde_json@1.0.120
-	serde_spanned@0.6.6
+	serde_json@1.0.121
+	serde_spanned@0.6.7
 	signal-hook@0.3.17
-	signal-hook-mio@0.2.3
+	signal-hook-mio@0.2.4
 	signal-hook-registry@1.4.2
 	slab@0.4.9
 	smallvec@1.13.2
@@ -127,17 +125,17 @@ CRATES="
 	strsim@0.11.1
 	strum@0.26.3
 	strum_macros@0.26.4
-	syn@2.0.70
+	syn@2.0.72
 	synstructure@0.13.1
 	terminal-light@1.4.0
-	thiserror@1.0.61
-	thiserror-impl@1.0.61
-	tokio@1.38.0
-	tokio-macros@2.3.0
+	thiserror@1.0.63
+	thiserror-impl@1.0.63
+	tokio@1.39.2
+	tokio-macros@2.4.0
 	tokio-stream@0.1.15
-	toml@0.8.14
-	toml_datetime@0.6.6
-	toml_edit@0.22.15
+	toml@0.8.16
+	toml_datetime@0.6.7
+	toml_edit@0.22.17
 	tui-input@0.9.0
 	unicode-ident@1.0.12
 	unicode-segmentation@1.11.0
@@ -145,7 +143,7 @@ CRATES="
 	unicode-width@0.1.13
 	utf8parse@0.2.2
 	uuid@1.10.0
-	version_check@0.9.4
+	version_check@0.9.5
 	wasi@0.11.0+wasi-snapshot-preview1
 	winapi@0.3.9
 	winapi-i686-pc-windows-gnu@0.4.0
@@ -169,8 +167,8 @@ CRATES="
 	windows_x86_64_gnullvm@0.52.6
 	windows_x86_64_msvc@0.48.5
 	windows_x86_64_msvc@0.52.6
-	winnow@0.6.13
-	xterm-query@0.4.0
+	winnow@0.6.16
+	xterm-query@0.4.1
 	zerocopy@0.7.35
 	zerocopy-derive@0.7.35
 "
