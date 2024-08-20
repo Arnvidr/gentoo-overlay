@@ -22,6 +22,11 @@ RDEPEND="${DEPEND}"
 
 EMESON_BUILDTYPE=release
 
+src_configure() {
+	local emesonargs=( -Duse_system_lua=true )
+	meson_src_configure
+}
+
 pkg_postinst() {
 	xdg_desktop_database_update
 	xdg_icon_cache_update
