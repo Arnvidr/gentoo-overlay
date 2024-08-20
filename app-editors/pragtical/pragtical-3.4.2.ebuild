@@ -23,7 +23,7 @@ RDEPEND="${DEPEND}"
 EMESON_BUILDTYPE=release
 
 src_configure() {
-	local emesonargs=( -Duse_system_lua=true )
+	local emesonargs=( --wrap-mode default -Duse_system_lua=true )
 	meson_src_configure
 }
 
