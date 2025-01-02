@@ -92,6 +92,7 @@ CRATES="
 	num-traits@0.2.19
 	object@0.36.7
 	option-ext@0.2.0
+	parking@2.2.1
 	parking_lot@0.12.3
 	parking_lot_core@0.9.10
 	paste@1.0.15
