@@ -7,6 +7,15 @@ EAPI=8
 inherit desktop wrapper
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
+SIMPLE_NAME="Idea Ultimate"
+MY_PN="idea"
+SRC_URI_PATH="idea"
+SRC_URI_PN="ideaIU"
+SRC_URI="https://download.jetbrains.com/${SRC_URI_PATH}/${SRC_URI_PN}-${PV}.tar.gz -> ${P}.tar.gz"
+
+BUILD_NUMBER="243.25659.39"
+S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
+
 HOMEPAGE="https://www.jetbrains.com/idea/"
 LICENSE="
 	|| ( jetbrains_business-4.0 jetbrains_individual-4.2 jetbrains_educational-4.0 jetbrains_classroom-4.2 jetbrains_opensource-4.2 )
@@ -21,6 +30,8 @@ RDEPEND="
 	dev-libs/libdbusmenu
 	llvm-core/lldb
 	media-libs/mesa[X(+)]
+	sys-devel/gcc
+	sys-libs/glibc
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXcursor
@@ -31,20 +42,10 @@ RDEPEND="
 	x11-libs/libXrandr
 "
 
-SIMPLE_NAME="Idea Ultimate"
-MY_PN="idea"
-SRC_URI_PATH="idea"
-SRC_URI_PN="ideaIU"
-SRC_URI="https://download.jetbrains.com/${SRC_URI_PATH}/${SRC_URI_PN}-${PV}.tar.gz -> ${P}.tar.gz"
-
-BUILD_NUMBER="243.23654.189"
-S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
-
 src_prepare() {
 	default
 
 	rm -rv ./lib/async-profiler/aarch64 || die
-#	rm -rv ./plugins/cwm-plugin/quiche-native/linux-aarch64 || die
 }
 
 src_install() {
@@ -52,13 +53,12 @@ src_install() {
 
 	insinto "${dir}"
 	doins -r *
-	fperms 755 "${dir}"/bin/{"${MY_PN}",format,inspect,jetbrains_client,ltedit,remote-dev-server}.sh
-	fperms 755 "${dir}"/bin/{"${MY_PN}",fsnotifier,restarter}
+	fperms 755 "${dir}"/bin/{"${MY_PN}",{format,inspect,jetbrains_client,ltedit,remote-dev-server}.sh}
+	fperms 755 "${dir}"/bin/{fsnotifier,restarter}
 
 	fperms 755 "${dir}"/jbr/bin/{java,javac,javadoc,jcmd,jdb,jfr,jhsdb,jinfo,jmap,jps,jrunscript,jstack,jstat,keytool,rmiregistry,serialver}
 	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
 
-	fperms 755 "${dir}"/plugins/javascript-plugin/helpers/package-version-range-matcher/node_modules/semver/bin/semver.js
 	fperms 755 "${dir}"/plugins/maven/lib/maven3/bin/{mvn,mvnDebug,mvnyjp}
 	fperms 755 "${dir}"/plugins/tailwindcss/server/tailwindcss-language-server
 
