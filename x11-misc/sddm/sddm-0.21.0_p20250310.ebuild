@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,14 +8,14 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 else
-	COMMIT=ae072f901671b68861da9577e3e12e350a9053d5
+	COMMIT=e505a38c241677c3b3c8f4bdaf65249d452f05e3
 	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
-	KEYWORDS="~amd64"
+	KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
 fi
 
-QTMIN=6.7.1
-inherit cmake linux-info pam systemd tmpfiles
+QTMIN=6.7.2
+inherit cmake linux-info optfeature pam systemd tmpfiles
 
 DESCRIPTION="Simple Desktop Display Manager"
 HOMEPAGE="https://github.com/sddm/sddm"
@@ -28,7 +28,7 @@ IUSE="+elogind systemd test +X"
 REQUIRED_USE="^^ ( elogind systemd )"
 RESTRICT="!test? ( test )"
 
-COMMON_DEPEND="
+DEPEND="
 	acct-group/sddm
 	acct-user/sddm
 	>=dev-qt/qtbase-${QTMIN}:6[dbus,gui,network]
@@ -39,10 +39,7 @@ COMMON_DEPEND="
 	elogind? ( sys-auth/elogind[pam] )
 	systemd? ( sys-apps/systemd:=[pam] )
 "
-DEPEND="${COMMON_DEPEND}
-	test? ( >=dev-qt/qtbase-${QTMIN}:6[network,test] )
-"
-RDEPEND="${COMMON_DEPEND}
+RDEPEND="${DEPEND}
 	X? ( x11-base/xorg-server )
 	!systemd? ( gui-libs/display-manager-init )
 "
@@ -57,7 +54,8 @@ BDEPEND="
 PATCHES=(
 	# Downstream patches
 	"${FILESDIR}/${PN}-0.20.0-respect-user-flags.patch"
-	"${FILESDIR}/${PN}-0.21.0-Xsession.patch" # bug 611210
+	"${FILESDIR}/${P}-Xsession-xinitrc.patch" # bug 611210
+	"${FILESDIR}/${P}-set-XAUTHLOCALHOSTNAME.patch" # bug 913862, thx opensuse
 )
 
 pkg_setup() {
@@ -142,6 +140,9 @@ pkg_postinst() {
 		elog "  Nvidia GPU owners in particular should pay attention"
 		elog "  to the troubleshooting section."
 	fi
+
+	optfeature "Weston DisplayServer support (EXPERIMENTAL)" "dev-libs/weston[kiosk]"
+	optfeature "KWin DisplayServer support (EXPERIMENTAL)" "kde-plasma/kwin"
 
 	systemd_reenable sddm.service
 }
