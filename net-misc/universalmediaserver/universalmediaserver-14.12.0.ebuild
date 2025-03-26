@@ -22,7 +22,7 @@ JAVA_PKG_FORCE_VM="openjdk-17"
 DEPEND="app-arch/unzip"
 RDEPEND=">=virtual/jre-17
 	dcraw? ( media-gfx/dcraw )
-	ffmpeg? ( media-video/ffmpeg[encode] )
+	ffmpeg? ( media-video/ffmpeg[lame] )
 	libmediainfo? ( media-libs/libmediainfo )
 	libzen? ( media-libs/libzen )
 	vlc? ( media-video/vlc[encode] ) "
