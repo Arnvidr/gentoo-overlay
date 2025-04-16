@@ -3,8 +3,7 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
-DISTUTILS_IN_SOURCE_BUILD=0
+DISTUTILS_USE_PEP517=no
 PYTHON_COMPAT=( python3_{11..13} )
 
 inherit distutils-r1 xdg-utils
@@ -38,9 +37,9 @@ RDEPEND="${DEPEND}
 
 PATCHES=( "${FILESDIR}/${PN}-paths.patch" )
 
-#python_prepare() {
-#	sed -i -e "s/find_packages()/find_packages(exclude=['tests'])/" setup.py || die
-#}
+python_prepare() {
+	sed -i -e "s/find_packages()/find_packages(exclude=['tests'])/" setup.py || die
+}
 
 pkg_postinst() {
 	xdg_icon_cache_update
