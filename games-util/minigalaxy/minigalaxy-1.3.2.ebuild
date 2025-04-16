@@ -38,7 +38,7 @@ RDEPEND="${DEPEND}
 
 PATCHES=( "${FILESDIR}/${PN}-paths.patch" )
 
-python_prepare() {
+src_prepare() {
 	sed -i -e "s/find_packages()/find_packages(exclude=['tests'])/" setup.py || die
 }
 
