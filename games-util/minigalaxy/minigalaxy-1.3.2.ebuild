@@ -38,10 +38,9 @@ RDEPEND="${DEPEND}
 
 PATCHES=( "${FILESDIR}/${PN}-paths.patch" )
 
-src_prepare() {
-	sed -i -e "s/find_packages()/find_packages(exclude=['tests'])/" setup.py || die
-	default
-}
+#python_prepare() {
+#	sed -i -e "s/find_packages()/find_packages(exclude=['tests'])/" setup.py || die
+#}
 
 pkg_postinst() {
 	xdg_icon_cache_update
