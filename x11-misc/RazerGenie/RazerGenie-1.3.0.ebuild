@@ -12,15 +12,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="experimental matrix"
 
-DEPEND="dev-qt/qtdbus:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtxml:5"
+DEPEND="dev-python/pyqt6[dbus,network,widgets,xml]"
 RDEPEND="${DEPEND}
 	sys-apps/openrazer"
 
-BDEPEND="dev-qt/linguist-tools:5
-	virtual/pkgconfig"
+#dev-qt/linguist-tools:5
+BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	cmake -G ninja
