@@ -13,7 +13,7 @@ SRC_URI_PATH="idea"
 SRC_URI_PN="ideaIU"
 SRC_URI="https://download.jetbrains.com/${SRC_URI_PATH}/${SRC_URI_PN}-${PV}.tar.gz -> ${P}.tar.gz"
 
-BUILD_NUMBER="243.26053.27"
+BUILD_NUMBER="251.25410.109"
 S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
 
 HOMEPAGE="https://www.jetbrains.com/idea/"
