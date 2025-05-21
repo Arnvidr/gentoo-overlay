@@ -8,8 +8,8 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 else
-	COMMIT=e505a38c241677c3b3c8f4bdaf65249d452f05e3
-	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	COMMIT=4fe234bd475ccb2a1e5aa194bec5c3aad08cebe6
+	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}-${COMMIT:0:8}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 	KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
 fi
@@ -36,7 +36,9 @@ DEPEND="
 	sys-libs/pam
 	x11-libs/libXau
 	x11-libs/libxcb:=
-	elogind? ( sys-auth/elogind[pam] )
+	elogind? (
+		sys-auth/elogind[pam]
+	)
 	systemd? ( sys-apps/systemd:=[pam] )
 "
 RDEPEND="${DEPEND}
@@ -54,8 +56,8 @@ BDEPEND="
 PATCHES=(
 	# Downstream patches
 	"${FILESDIR}/${PN}-0.20.0-respect-user-flags.patch"
-	"${FILESDIR}/${P}-Xsession-xinitrc.patch" # bug 611210
-	"${FILESDIR}/${P}-set-XAUTHLOCALHOSTNAME.patch" # bug 913862, thx opensuse
+	"${FILESDIR}/${PN}-0.21.0_p20250310-Xsession-xinitrc.patch" # bug 611210
+	"${FILESDIR}/${PN}-0.21.0_p20250310-set-XAUTHLOCALHOSTNAME.patch" # bug 913862, thx opensuse
 )
 
 pkg_setup() {
@@ -99,6 +101,9 @@ src_configure() {
 		-DSYSTEMD_TMPFILES_DIR="/usr/lib/tmpfiles.d"
 		-DNO_SYSTEMD=$(usex !systemd)
 		-DUSE_ELOGIND=$(usex elogind)
+		# try to use VT7 first.
+		# Keep the same as CHECKVT from display-manager
+		-DSDDM_INITIAL_VT=7
 	)
 	cmake_src_configure
 }
