@@ -18,16 +18,17 @@ CRATES="
 	assert_cmd-2.0.16
 	autocfg-1.4.0
 	bitflags-1.3.2
-	bitflags-2.8.0
+	bitflags-2.9.0
 	bstr-1.11.3
 	bumpalo-3.17.0
-	cc-1.2.12
+	cc-1.2.16
 	cfg-if-1.0.0
 	cfg_aliases-0.2.1
-	chrono-0.4.39
-	clap-4.5.28
-	clap_builder-4.5.27
-	clap_complete-4.5.44
+	chrono-0.4.40
+	clap-4.5.31
+	clap_builder-4.5.31
+	clap_complete-4.5.46
+	clap_derive-4.5.28
 	clap_lex-0.7.4
 	clap_mangen-0.2.26
 	colorchoice-1.0.3
@@ -41,38 +42,39 @@ CRATES="
 	directories-4.0.1
 	dirs-sys-0.3.7
 	doc-comment-0.3.3
-	either-1.13.0
+	either-1.15.0
 	errno-0.3.10
 	fastrand-2.3.0
 	filesize-0.2.0
 	getrandom-0.2.15
 	getrandom-0.3.1
+	heck-0.5.0
 	hermit-abi-0.3.9
 	iana-time-zone-0.1.61
 	iana-time-zone-haiku-0.1.2
 	io-lifetimes-1.0.11
 	is_terminal_polyfill-1.70.1
-	itoa-1.0.14
+	itoa-1.0.15
 	js-sys-0.3.77
-	libc-0.2.169
+	libc-0.2.170
 	libredox-0.1.3
 	linux-raw-sys-0.3.8
-	linux-raw-sys-0.4.15
-	log-0.4.25
+	linux-raw-sys-0.9.2
+	log-0.4.26
 	lscolors-0.13.0
 	memchr-2.7.4
 	nix-0.29.0
 	ntapi-0.4.1
 	nu-ansi-term-0.46.0
 	num-traits-0.2.19
-	once_cell-1.20.2
+	once_cell-1.20.3
 	overload-0.1.1
-	portable-atomic-1.10.0
+	portable-atomic-1.11.0
 	predicates-3.1.3
 	predicates-core-1.0.9
 	predicates-tree-1.0.12
-	proc-macro2-1.0.93
-	quote-1.0.38
+	proc-macro2-1.0.94
+	quote-1.0.39
 	rayon-1.10.0
 	rayon-core-1.12.1
 	redox_users-0.4.6
@@ -81,25 +83,25 @@ CRATES="
 	regex-syntax-0.8.5
 	roff-0.2.2
 	rustix-0.37.28
-	rustix-0.38.44
-	rustversion-1.0.19
-	ryu-1.0.19
-	serde-1.0.217
-	serde_derive-1.0.217
-	serde_json-1.0.138
+	rustix-1.0.1
+	rustversion-1.0.20
+	ryu-1.0.20
+	serde-1.0.219
+	serde_derive-1.0.219
+	serde_json-1.0.140
 	shlex-1.3.0
 	stfu8-0.2.7
 	strsim-0.11.1
-	syn-2.0.98
+	syn-2.0.100
 	sysinfo-0.27.8
-	tempfile-3.16.0
+	tempfile-3.18.0
 	terminal_size-0.2.6
 	termtree-0.5.1
 	thiserror-1.0.69
 	thiserror-impl-1.0.69
 	thousands-0.2.0
 	toml-0.5.11
-	unicode-ident-1.0.16
+	unicode-ident-1.0.18
 	unicode-width-0.1.14
 	utf8parse-0.2.2
 	wait-timeout-0.2.1
@@ -115,6 +117,7 @@ CRATES="
 	winapi-util-0.1.9
 	winapi-x86_64-pc-windows-gnu-0.4.0
 	windows-core-0.52.0
+	windows-link-0.1.0
 	windows-sys-0.48.0
 	windows-sys-0.59.0
 	windows-targets-0.48.5
@@ -136,6 +139,8 @@ CRATES="
 	windows_x86_64_msvc-0.52.6
 	wit-bindgen-rt-0.33.0
 "
+
+RUST_MIN_VER=1.85.0
 
 inherit cargo
 
