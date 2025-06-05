@@ -3,12 +3,12 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+#DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 
-inherit distutils-r1 xdg-utils
+inherit edo python-single-r1 xdg
 
-DESCRIPTION="Simple GOG client for Linux"
+DESCRIPTION="A simple GOG client for Linux"
 HOMEPAGE="https://github.com/sharkwouter/minigalaxy"
 
 if [[ ${PV} == *9999* ]] ; then
@@ -24,28 +24,34 @@ SLOT="0"
 
 IUSE="system-dosbox system-scummvm"
 # Slotted webkit-gtk to keep the same version as lutris, and avoid multiple slots
-DEPEND=">=dev-python/pygobject-3.30[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/setuptools[${PYTHON_USEDEP}]
-	>=x11-libs/gtk+-3
+DEPEND="
+	${PYTHON_DEPS}
+	$(python_gen_cond_dep '
+		>=dev-python/requests-2.0.0[${PYTHON_USEDEP}]
+		dev-python/pygobject:3[${PYTHON_USEDEP}]
+	')
 	>=net-libs/webkit-gtk-2.6:4.1
+	>=x11-libs/gtk+-3
 "
 RDEPEND="${DEPEND}
 	system-dosbox? ( games-emulation/dosbox )
 	system-scummvm? ( games-engines/scummvm )
 "
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
 PATCHES=( "${FILESDIR}/${PN}-paths.patch" )
 
-python_prepare_all() {
-	sed -i -e "s/find_packages()/find_packages(exclude=['tests'])/" setup.py || die
-	distutils-r1_python_prepare_all
+src_install() {
+	# workaround for legacy setup.py
+	edo ${EPYTHON} setup.py install --root="${D}" --prefix="${EPREFIX}/usr" --optimize=1
+	python_optimize
 }
 
 pkg_postinst() {
-	xdg_icon_cache_update
+	xdg_pkg_postinst
 }
 
 pkg_postrm() {
-	xdg_icon_cache_update
+	xdg_pkg_postinst
 }
