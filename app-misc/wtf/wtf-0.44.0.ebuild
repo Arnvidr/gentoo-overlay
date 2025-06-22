@@ -1,13 +1,13 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 # Change this when you update the ebuild
 GIT_COMMIT="c2e1809bb60cfcd51957585166bb70bb123d3ee6"
 EGO_PN="github.com/wtfutil/${PN}"
 
-inherit golang-vcs-snapshot-r1
+inherit go-module
 
 DESCRIPTION="A personal information dashboard for your terminal"
 HOMEPAGE="https://wtfutil.com"
