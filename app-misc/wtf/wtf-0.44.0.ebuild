@@ -9,17 +9,14 @@ EGO_PN="github.com/wtfutil/${PN}"
 
 inherit go-module
 
-DESCRIPTION="A personal information dashboard for your terminal"
-HOMEPAGE="https://wtfutil.com"
+DESCRIPTION="The personal information dashboard for your terminal"
+HOMEPAGE="https://github.com/wtfutil/wtf"
 SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 RESTRICT="mirror"
 
-LICENSE="MIT"
+LICENSE="MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="debug pie static"
-
-DOCS=( README.md )
 
 G="${WORKDIR}/${P}"
 S="${G}/src/${EGO_PN}"
@@ -30,37 +27,28 @@ src_compile() {
 	export GOPATH="${G}"
 	export CGO_CFLAGS="${CFLAGS}"
 	export CGO_LDFLAGS="${LDFLAGS}"
-	(use static && ! use pie) && export CGO_ENABLED=0
-	(use static && use pie) && CGO_LDFLAGS+=" -static"
 
 	local myldflags=(
-		"$(usex !debug '-s -w' '')"
+		"-s -w"
 		-X "main.version=v${PV}-${GIT_COMMIT:0:6}"
 		-X "'main.date=$(date -u '+%FT%T%z')'"
 	)
 
 	local mygoargs=(
-		-v -work -x
-		-buildmode "$(usex pie pie exe)"
-		-asmflags "all=-trimpath=${S}"
-		-gcflags "all=-trimpath=${S}"
 		-ldflags "${myldflags[*]}"
-		-tags "$(usex static 'netgo' '')"
-		-installsuffix "$(usex static 'netgo' '')"
 		-o bin/wtfutil
 	)
 
-	go build "${mygoargs[@]}" || die
+	ego build "${mygoargs[@]}"
 }
 
 src_install() {
 	dobin bin/wtfutil
-	use debug && dostrip -x /usr/bin/wtfutil
-	einstalldocs
+	dodoc README.md
 }
 
 pkg_postinst() {
 	einfo
-	elog "See https://wtfutil.com/posts/configuration/ for configuration guide"
+	elog "See https://wtfutil.com/configuration/files/ for configuration guide"
 	einfo
 }
