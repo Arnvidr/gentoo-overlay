@@ -18,13 +18,12 @@ LICENSE="MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
-G="${WORKDIR}/${P}"
-S="${G}/src/${EGO_PN}"
+S="${WORKDIR}/${P}"
 
 QA_PRESTRIPPED="usr/bin/.*"
 
 src_compile() {
-	export GOPATH="${G}"
+	export GOPATH="${S}"
 	export CGO_CFLAGS="${CFLAGS}"
 	export CGO_LDFLAGS="${LDFLAGS}"
 
