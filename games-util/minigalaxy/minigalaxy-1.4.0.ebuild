@@ -34,7 +34,7 @@ DEPEND="
 	x11-misc/xdg-utils
 "
 RDEPEND="${DEPEND}
-	system-dosbox? ( games-emulation/dosbox )
+	system-dosbox? ( games-emulation/dosbox-staging )
 	system-scummvm? ( games-engines/scummvm )
 	system-wine? ( virtual/wine )
 "
