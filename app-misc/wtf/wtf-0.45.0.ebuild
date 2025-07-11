@@ -22,6 +22,8 @@ S="${WORKDIR}/${P}"
 
 QA_PRESTRIPPED="usr/bin/.*"
 
+BDEPEND=">=dev-lang/go-1.24.5:="
+
 src_compile() {
 	export GOPATH="${S}"
 	export CGO_CFLAGS="${CFLAGS}"
