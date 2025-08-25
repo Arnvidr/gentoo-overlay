@@ -75,7 +75,7 @@ src_install() {
 	doexe src/main/external-resources/UMS.sh
 
 	insinto ${UMS_HOME}
-	doins -r target/ums.jar src/main/external-resources/*.conf src/main/external-resources/documentation src/main/external-resources/renderers src/main/external-resources/web src/main/external-resources/*.xml
+	doins -r target/ums.jar src/main/external-resources/*.conf src/main/external-resources/renderers src/main/external-resources/web src/main/external-resources/*.xml
 	dodoc CHANGELOG.md README.md
 
 	newicon -s 32 icon-32.png ${PN}.png
