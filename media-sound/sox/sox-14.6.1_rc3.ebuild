@@ -63,10 +63,6 @@ BDEPEND="
 
 DOCS=( AUTHORS ChangeLog  )
 
-PATCHES=(
-	"${FILESDIR}"/sox-14.6.0.2-fix-symlinks.patch
-)
-
 src_prepare() {
 	default
 	eautoreconf
