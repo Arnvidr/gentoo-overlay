@@ -13,7 +13,7 @@ SRC_URI_PATH="idea"
 SRC_URI_PN="ideaIU"
 SRC_URI="https://download.jetbrains.com/${SRC_URI_PATH}/${SRC_URI_PN}-${PV}.tar.gz -> ${P}.tar.gz"
 
-BUILD_NUMBER="252.23892.409"
+BUILD_NUMBER="252.26199.169"
 S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
 
 HOMEPAGE="https://www.jetbrains.com/idea/"
@@ -57,7 +57,7 @@ src_install() {
 	fperms 755 "${dir}"/bin/{fsnotifier,restarter}
 
 	fperms 755 "${dir}"/jbr/bin/{java,javac,javadoc,jcmd,jdb,jfr,jhsdb,jinfo,jmap,jps,jrunscript,jstack,jstat,keytool,rmiregistry,serialver}
-	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,jcef_helper,jexec,jspawnhelper}
+	fperms 755 "${dir}"/jbr/lib/{chrome-sandbox,cef_server,jcef_helper,jexec,jspawnhelper}
 
 	fperms 755 "${dir}"/plugins/maven/lib/maven3/bin/{mvn,mvnDebug,mvnyjp}
 	fperms 755 "${dir}"/plugins/tailwindcss/server/tailwindcss-language-server
