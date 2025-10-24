@@ -228,7 +228,7 @@ CRATES="
 	uuid@1.18.1
 	version_check@0.9.5
 	vtparse@0.6.2
-	wasi@0.11.0+wasi-snapshot-preview1
+	wasi@0.11.1+wasi-snapshot-preview1
 	wasip2@1.0.1+wasi-0.2.4
 	wasm-bindgen@0.2.104
 	wasm-bindgen-backend@0.2.104
