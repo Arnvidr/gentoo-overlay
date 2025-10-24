@@ -225,7 +225,7 @@ CRATES="
 	unicode-width@0.1.14
 	unicode-width@0.2.0
 	utf8parse@0.2.2
-	uuid@1.18.0
+	uuid@1.18.1
 	version_check@0.9.5
 	vtparse@0.6.2
 	wasi@0.11.0+wasi-snapshot-preview1
