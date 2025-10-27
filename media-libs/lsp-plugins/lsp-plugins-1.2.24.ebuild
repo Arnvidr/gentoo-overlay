@@ -50,6 +50,9 @@ src_configure(){
 
 src_compile(){
 	emake
-	emake install PREFIX="/usr" DESTDIR="${ED}" LIBDIR="/usr/$(get_libdir)"
 }
 
+src_install(){
+	emake PREFIX="/usr" DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
+	einstalldocs
+}
