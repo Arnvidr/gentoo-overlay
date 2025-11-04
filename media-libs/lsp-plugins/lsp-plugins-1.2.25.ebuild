@@ -53,5 +53,8 @@ src_compile(){
 }
 
 src_install(){
-	emake install PREFIX="/usr" DESTDIR="${ED}" LIBDIR="/usr/$(get_libdir)"
+	emake PREFIX="/usr" DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
+	insinto /usr/local/lib/lv2
+	doins ${S}/.build/target/lsp-plugin-fw/lsp-plugins-lv2.so
+	einstalldocs
 }
