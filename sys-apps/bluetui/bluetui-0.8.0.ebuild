@@ -6,13 +6,13 @@
 EAPI=8
 
 CRATES="
-	aho-corasick@1.1.3
+	aho-corasick@1.1.4
 	allocator-api2@0.2.21
 	anstream@0.6.21
 	anstyle@1.0.13
 	anstyle-parse@0.2.7
-	anstyle-query@1.1.4
-	anstyle-wincon@3.0.10
+	anstyle-query@1.1.5
+	anstyle-wincon@3.0.11
 	anyhow@1.0.100
 	async-channel@2.5.0
 	atomic@0.6.1
@@ -31,8 +31,8 @@ CRATES="
 	castaway@0.2.4
 	cfg-if@1.0.4
 	cfg_aliases@0.2.1
-	clap@4.5.50
-	clap_builder@4.5.50
+	clap@4.5.51
+	clap_builder@4.5.51
 	clap_derive@4.5.49
 	clap_lex@0.7.6
 	colorchoice@1.0.4
@@ -40,13 +40,12 @@ CRATES="
 	compact_str@0.9.0
 	concurrent-queue@2.5.0
 	convert_case@0.7.1
-	coolor@1.1.0
 	cpufeatures@0.2.17
 	crossbeam-utils@0.8.21
 	crossterm@0.28.1
 	crossterm@0.29.0
 	crossterm_winapi@0.9.1
-	crypto-common@0.1.6
+	crypto-common@0.1.7
 	csscolorparser@0.6.2
 	custom_debug@0.6.2
 	custom_debug_derive@0.6.2
@@ -57,14 +56,14 @@ CRATES="
 	dbus-crossroads@0.5.2
 	dbus-tokio@0.7.6
 	deltae@0.3.2
-	deranged@0.5.4
+	deranged@0.5.5
 	derive_more@2.0.1
 	derive_more-impl@2.0.1
 	digest@0.10.7
 	dirs@6.0.0
 	dirs-sys@0.5.0
 	displaydoc@0.2.5
-	document-features@0.2.11
+	document-features@0.2.12
 	either@1.15.0
 	equivalent@1.0.2
 	errno@0.3.14
@@ -87,7 +86,7 @@ CRATES="
 	futures-sink@0.3.31
 	futures-task@0.3.31
 	futures-util@0.3.31
-	generic-array@0.14.9
+	generic-array@0.14.7
 	getrandom@0.2.16
 	getrandom@0.3.4
 	hashbrown@0.15.5
@@ -102,8 +101,8 @@ CRATES="
 	itertools@0.13.0
 	itertools@0.14.0
 	itoa@1.0.15
-	js-sys@0.3.81
-	kasuari@0.4.9
+	js-sys@0.3.82
+	kasuari@0.4.10
 	lab@0.11.0
 	lazy_static@1.5.0
 	libc@0.2.177
@@ -112,18 +111,18 @@ CRATES="
 	line-clipping@0.3.4
 	linux-raw-sys@0.4.15
 	linux-raw-sys@0.11.0
-	litrs@0.4.2
+	litrs@1.0.0
 	lock_api@0.4.14
 	log@0.4.28
 	lru@0.12.5
-	lru@0.14.0
+	lru@0.16.2
 	mac_address@1.1.8
 	macaddr@1.0.1
 	memchr@2.7.6
 	memmem@0.1.1
 	memoffset@0.9.1
 	minimal-lexical@0.2.1
-	mio@1.0.4
+	mio@1.1.0
 	nix@0.29.0
 	nom@7.1.3
 	num-conv@0.1.0
@@ -154,18 +153,18 @@ CRATES="
 	pkg-config@0.3.32
 	portable-atomic@1.11.1
 	powerfmt@0.2.0
-	proc-macro2@1.0.101
-	quote@1.0.41
+	proc-macro2@1.0.103
+	quote@1.0.42
 	r-efi@5.3.0
 	rand@0.8.5
 	rand_core@0.6.4
 	ratatui@0.29.0
-	ratatui@0.30.0-alpha.5
-	ratatui-core@0.1.0-alpha.6
-	ratatui-crossterm@0.1.0-alpha.5
-	ratatui-macros@0.7.0-alpha.4
-	ratatui-termwiz@0.1.0-alpha.5
-	ratatui-widgets@0.3.0-alpha.5
+	ratatui@0.30.0-beta.0
+	ratatui-core@0.1.0-beta.0
+	ratatui-crossterm@0.1.0-beta.0
+	ratatui-macros@0.7.0-beta.0
+	ratatui-termwiz@0.1.0-beta.0
+	ratatui-widgets@0.3.0-beta.0
 	redox_syscall@0.5.18
 	redox_users@0.5.2
 	regex@1.12.2
@@ -183,7 +182,7 @@ CRATES="
 	serde_spanned@1.0.3
 	sha2@0.10.9
 	signal-hook@0.3.18
-	signal-hook-mio@0.2.4
+	signal-hook-mio@0.2.5
 	signal-hook-registry@1.4.6
 	siphasher@1.0.1
 	slab@0.4.11
@@ -196,9 +195,8 @@ CRATES="
 	strum_macros@0.26.4
 	strum_macros@0.27.2
 	syn@1.0.109
-	syn@2.0.107
+	syn@2.0.110
 	synstructure@0.13.2
-	terminal-light@1.8.0
 	terminfo@0.9.0
 	termios@0.3.3
 	termwiz@0.23.3
@@ -218,7 +216,7 @@ CRATES="
 	tui-input@0.12.1
 	typenum@1.19.0
 	ucd-trie@0.1.7
-	unicode-ident@1.0.20
+	unicode-ident@1.0.22
 	unicode-segmentation@1.12.0
 	unicode-truncate@1.1.0
 	unicode-truncate@2.0.0
@@ -230,11 +228,10 @@ CRATES="
 	vtparse@0.6.2
 	wasi@0.11.1+wasi-snapshot-preview1
 	wasip2@1.0.1+wasi-0.2.4
-	wasm-bindgen@0.2.104
-	wasm-bindgen-backend@0.2.104
-	wasm-bindgen-macro@0.2.104
-	wasm-bindgen-macro-support@0.2.104
-	wasm-bindgen-shared@0.2.104
+	wasm-bindgen@0.2.105
+	wasm-bindgen-macro@0.2.105
+	wasm-bindgen-macro-support@0.2.105
+	wasm-bindgen-shared@0.2.105
 	wezterm-bidi@0.2.3
 	wezterm-blob-leases@0.1.1
 	wezterm-color-types@0.3.0
@@ -268,7 +265,6 @@ CRATES="
 	windows_x86_64_msvc@0.53.1
 	winnow@0.7.13
 	wit-bindgen@0.46.0
-	xterm-query@0.5.2
 "
 
 inherit cargo
