@@ -4,7 +4,7 @@
 EAPI=8
 
 # Change this when you update the ebuild
-GIT_COMMIT="1c1e31e33fdf119c96bb43dd16a08cdb86340a6b"
+GIT_COMMIT="ae7dfe10136a9db355af1b06ed7b20db9f738fce"
 EGO_PN="github.com/wtfutil/${PN}"
 
 inherit go-module
