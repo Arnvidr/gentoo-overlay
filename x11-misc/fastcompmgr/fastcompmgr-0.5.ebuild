@@ -28,7 +28,6 @@ src_configure() {
 	debug-print-function ${FUNCNAME} "$@"
 }
 
-src_prepare() {
-	default
-	sed -i "/^PREFIX/s:=.*:=${EPREFIX}/usr:" Makefile || die
+src_install() {
+	emake PREFIX="${D}" DESTDIR="${D}" install
 }
