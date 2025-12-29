@@ -3,10 +3,10 @@
 
 EAPI=8
 
-#XORG_MODULE=app/
+XORG_MODULE=app/
 inherit xorg-3
 
-DESCRIPTION="X Compositing manager (for of xcompmgr)" 
+DESCRIPTION="X Compositing manager (fork of xcompmgr)" 
 HOMEPAGE="https://github.com/tycho-kirchner/fastcompmgr"
 SRC_URI="https://github.com/tycho-kirchner/fastcompmgr/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -23,3 +23,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
+
+src_configure() {
+	debug-print-function ${FUNCNAME} "$@"
+}
