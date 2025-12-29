@@ -30,5 +30,6 @@ src_configure() {
 
 src_install() {
 	mkdir -p "${D}/usr/bin"
+	mkdir -p "${D}/usr/share/man/man1"
 	emake PREFIX="${D}/usr" DESTDIR="${D}" install
 }
