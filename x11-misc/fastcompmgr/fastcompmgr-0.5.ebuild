@@ -4,8 +4,7 @@
 EAPI=8
 
 #XORG_MODULE=app/
-#inherit xorg-3
-inherit virtualx xdg
+inherit xorg-3
 
 DESCRIPTION="X Compositing manager (for of xcompmgr)" 
 HOMEPAGE="https://github.com/tycho-kirchner/fastcompmgr"
