@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,14 +8,14 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 else
-	COMMIT=42e88b70c3e558495d07d29d346664301da6e974
-	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+	COMMIT=dfa5315fd600760f8f3abddf7fb704202ffb07b3
+	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}-${COMMIT:0:8}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 	KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
 fi
 
 QTMIN=6.7.2
-inherit cmake linux-info optfeature pam systemd tmpfiles
+inherit cmake linux-info pam systemd tmpfiles
 
 DESCRIPTION="Simple Desktop Display Manager"
 HOMEPAGE="https://github.com/sddm/sddm"
@@ -23,7 +23,7 @@ SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PAM_TAR}.tar.xz"
 
 LICENSE="GPL-2+ MIT CC-BY-3.0 CC-BY-SA-3.0 public-domain"
 SLOT="0"
-IUSE="+elogind systemd test +X"
+IUSE="+elogind systemd test"
 
 REQUIRED_USE="^^ ( elogind systemd )"
 RESTRICT="!test? ( test )"
@@ -42,12 +42,11 @@ DEPEND="
 	systemd? ( sys-apps/systemd:=[pam] )
 "
 RDEPEND="${DEPEND}
-	X? ( x11-base/xorg-server )
+	gui-apps/sddm-gentoo-config
 	!systemd? ( gui-libs/display-manager-init )
 "
 BDEPEND="
 	dev-python/docutils
-	>=dev-build/cmake-3.25.0
 	>=dev-qt/qttools-${QTMIN}[linguist]
 	kde-frameworks/extra-cmake-modules:0
 	virtual/pkgconfig
@@ -57,7 +56,11 @@ PATCHES=(
 	# Downstream patches
 	"${FILESDIR}/${PN}-0.20.0-respect-user-flags.patch"
 	"${FILESDIR}/${PN}-0.21.0_p20250310-Xsession-xinitrc.patch" # bug 611210
-	"${FILESDIR}/${PN}-0.21.0_p20250310-set-XAUTHLOCALHOSTNAME.patch" # bug 913862, thx opensuse
+	"${FILESDIR}/${P}-cmake-minreqver-3.16.patch" # pending upstream, bug 964439
+	"${FILESDIR}/${P}-fix-restart-greeter.patch" # pending upstream
+	# thx opensuse
+	"${FILESDIR}/${PN}-0.21.0_p20250310-set-XAUTHLOCALHOSTNAME.patch" # bug 913862
+	"${FILESDIR}/${P}-fix-terminal-clearing.patch"
 )
 
 pkg_setup() {
@@ -71,14 +74,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	touch 01gentoo.conf || die
-
-cat <<-EOF >> 01gentoo.conf
-[General]
-# Remove qtvirtualkeyboard as InputMethod default
-InputMethod=
-EOF
-
 	cmake_src_prepare
 
 	if ! use test; then
@@ -101,18 +96,21 @@ src_configure() {
 		-DSYSTEMD_TMPFILES_DIR="/usr/lib/tmpfiles.d"
 		-DNO_SYSTEMD=$(usex !systemd)
 		-DUSE_ELOGIND=$(usex elogind)
-		# try to use VT7 first.
-		# Keep the same as CHECKVT from display-manager
-		-DSDDM_INITIAL_VT=7
 	)
+
+	if use elogind; then
+		mycmakeargs+=(
+			# try to use VT7 first.
+			# Keep the same as CHECKVT from display-manager
+			-DSDDM_INITIAL_VT=7
+		)
+	fi
+
 	cmake_src_configure
 }
 
 src_install() {
 	cmake_src_install
-
-	insinto /etc/sddm.conf.d/
-	doins "${S}"/01gentoo.conf
 
 	# with systemd logs are sent to journald, so no point to bother in that case
 	if ! use systemd; then
@@ -145,9 +143,6 @@ pkg_postinst() {
 		elog "  Nvidia GPU owners in particular should pay attention"
 		elog "  to the troubleshooting section."
 	fi
-
-	optfeature "Weston DisplayServer support (EXPERIMENTAL)" "dev-libs/weston[kiosk]"
-	optfeature "KWin DisplayServer support (EXPERIMENTAL)" "kde-plasma/kwin"
 
 	systemd_reenable sddm.service
 }
