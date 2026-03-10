@@ -45,7 +45,7 @@ RDEPEND="
 	media-libs/libsamplerate
 	media-libs/libtheora
 	media-libs/libvorbis
-	>=media-libs/libvpx-1.12.0:=
+	>=media-libs/libvpx-1.16.0:=
 	media-libs/opus
 	media-libs/speex
 	media-libs/x264:=
