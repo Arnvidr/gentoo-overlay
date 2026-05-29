@@ -1,0 +1,191 @@
+# Copyright 2024 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+CRATES="
+	anyhow@1.0.102
+	async-broadcast@0.7.2
+	async-channel@2.5.0
+	async-recursion@1.1.1
+	async-trait@0.1.89
+	autocfg@1.5.1
+	bitflags@2.11.1
+	bumpalo@3.20.3
+	bytes@1.11.1
+	cairo-rs@0.22.0
+	cairo-sys-rs@0.22.0
+	cfg-expr@0.20.7
+	cfg-if@1.0.4
+	concurrent-queue@2.5.0
+	crossbeam-utils@0.8.21
+	endi@1.1.1
+	enumflags2@0.7.12
+	enumflags2_derive@0.7.12
+	equivalent@1.0.2
+	errno@0.3.14
+	event-listener@5.4.1
+	event-listener-strategy@0.5.4
+	fastrand@2.4.1
+	field-offset@0.3.6
+	foldhash@0.1.5
+	futures-channel@0.3.32
+	futures-core@0.3.32
+	futures-executor@0.3.32
+	futures-io@0.3.32
+	futures-lite@2.6.1
+	futures-macro@0.3.32
+	futures-task@0.3.32
+	futures-util@0.3.32
+	gdk-pixbuf@0.22.0
+	gdk-pixbuf-sys@0.22.0
+	gdk4@0.11.2
+	gdk4-sys@0.11.2
+	gdk4-x11@0.11.0
+	gdk4-x11-sys@0.11.0
+	getrandom@0.4.2
+	gio@0.22.6
+	gio-sys@0.22.0
+	gl@0.14.0
+	gl_generator@0.14.0
+	glib@0.22.7
+	glib-macros@0.22.6
+	glib-sys@0.22.6
+	gobject-sys@0.22.6
+	graphene-rs@0.22.0
+	graphene-sys@0.22.0
+	gsk4@0.11.1
+	gsk4-sys@0.11.1
+	gtk4@0.11.3
+	gtk4-layer-shell@0.8.0
+	gtk4-layer-shell-sys@0.6.0
+	gtk4-macros@0.11.0
+	gtk4-sys@0.11.3
+	hashbrown@0.15.5
+	hashbrown@0.17.1
+	heck@0.5.0
+	hex@0.4.3
+	id-arena@2.3.0
+	indexmap@2.14.0
+	itoa@1.0.18
+	js-sys@0.3.99
+	khronos_api@3.1.0
+	ksni@0.3.4
+	lazy_static@1.5.0
+	leb128fmt@0.1.0
+	libc@0.2.186
+	libpulse-binding@2.30.1
+	libpulse-sys@1.23.0
+	linux-raw-sys@0.12.1
+	log@0.4.29
+	memchr@2.8.0
+	memoffset@0.9.1
+	mio@1.2.0
+	nu-ansi-term@0.50.3
+	num-derive@0.4.2
+	num-traits@0.2.19
+	once_cell@1.21.4
+	ordered-stream@0.2.0
+	pango@0.22.6
+	pango-sys@0.22.0
+	parking@2.2.1
+	pastey@0.2.3
+	pin-project-lite@0.2.17
+	pkg-config@0.3.33
+	prettyplease@0.2.37
+	proc-macro-crate@3.5.0
+	proc-macro2@1.0.106
+	quote@1.0.45
+	r-efi@6.0.0
+	rustc_version@0.4.1
+	rustix@1.1.4
+	rustversion@1.0.22
+	semver@1.0.28
+	serde@1.0.228
+	serde_core@1.0.228
+	serde_derive@1.0.228
+	serde_json@1.0.150
+	serde_repr@0.1.20
+	serde_spanned@1.1.1
+	sharded-slab@0.1.7
+	shlex@1.3.0
+	signal-hook-registry@1.4.8
+	slab@0.4.12
+	smallvec@1.15.1
+	socket2@0.6.3
+	syn@2.0.117
+	system-deps@7.0.8
+	target-lexicon@0.13.3
+	tempfile@3.27.0
+	thiserror@2.0.18
+	thiserror-impl@2.0.18
+	thread_local@1.1.9
+	tokio@1.52.3
+	tokio-macros@2.7.0
+	toml@1.1.2+spec-1.1.0
+	toml_datetime@1.1.1+spec-1.1.0
+	toml_edit@0.25.11+spec-1.1.0
+	toml_parser@1.1.2+spec-1.1.0
+	toml_writer@1.1.1+spec-1.1.0
+	tracing@0.1.44
+	tracing-attributes@0.1.31
+	tracing-core@0.1.36
+	tracing-log@0.2.0
+	tracing-subscriber@0.3.23
+	uds_windows@1.2.1
+	unicode-ident@1.0.24
+	unicode-xid@0.2.6
+	uuid@1.23.1
+	valuable@0.1.1
+	version-compare@0.2.1
+	wasi@0.11.1+wasi-snapshot-preview1
+	wasip2@1.0.3+wasi-0.2.9
+	wasip3@0.4.0+wasi-0.3.0-rc-2026-01-06
+	wasm-bindgen@0.2.122
+	wasm-bindgen-macro@0.2.122
+	wasm-bindgen-macro-support@0.2.122
+	wasm-bindgen-shared@0.2.122
+	wasm-encoder@0.244.0
+	wasm-metadata@0.244.0
+	wasmparser@0.244.0
+	winapi@0.3.9
+	winapi-i686-pc-windows-gnu@0.4.0
+	winapi-x86_64-pc-windows-gnu@0.4.0
+	windows-link@0.2.1
+	windows-sys@0.61.2
+	winnow@1.0.3
+	wit-bindgen@0.51.0
+	wit-bindgen@0.57.1
+	wit-bindgen-core@0.51.0
+	wit-bindgen-rust@0.51.0
+	wit-bindgen-rust-macro@0.51.0
+	wit-component@0.244.0
+	wit-parser@0.244.0
+	x11-dl@2.21.0
+	xml-rs@0.8.28
+	zbus@5.15.0
+	zbus_macros@5.15.0
+	zbus_names@4.3.2
+	zmij@1.0.21
+	zvariant@5.11.0
+	zvariant_derive@5.11.0
+	zvariant_utils@3.3.1
+"
+
+inherit cargo
+
+DESCRIPTION="Per-application volume control for GNU/Linux desktops"
+HOMEPAGE="https://github.com/buzz/volctl"
+SRC_URI="https://github.com/buzz/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI+=" ${CARGO_CRATE_URIS}"
+
+LICENSE="GPL-3"
+SLOT="0"
+KEYWORDS="~amd64"
+
+DEPEND=""
+RDEPEND="${DEPEND}"
+BDEPEND=""
+
+RESTRICT="mirror test"
+
