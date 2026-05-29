@@ -149,10 +149,7 @@ src_install() {
 	        done
 	fi
 
-	# bundled script is always lowercase, and doesn't have -ultimate, -professional suffix.
-	local bundled_script_name="${PN#*-}.sh"
-
-	make_wrapper "${PN}" "${dir}/bin/$bundled_script_name" || die
+	make_wrapper "${PN}" "${dir}/bin/idea" || die
 
 	local pngfile="$(find ${dst}/bin -maxdepth 1 -iname '*.png')"
 	newicon $pngfile "${PN}.png" || die "we died"
