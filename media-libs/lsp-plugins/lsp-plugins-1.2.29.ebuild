@@ -44,7 +44,7 @@ src_configure(){
     use jack && MODULES+=" jack"
     use ladspa && MODULES+=" ladspa"
     use lv2 && MODULES+=" lv2"
-	emake config PREFIX="/usr" FEATURES="${MODULES}"
+	emake config PREFIX="${D}/usr" FEATURES="${MODULES}"
 	emake fetch
 }
 
@@ -53,8 +53,8 @@ src_compile(){
 }
 
 src_install(){
-	emake PREFIX="/usr" DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
-	insinto /usr/local/lib/lv2
-	doins ${S}/.build/target/lsp-plugin-fw/lsp-plugins-lv2.so
+	emake DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
+	#insinto /usr/local/lib/lv2
+	#doins ${S}/.build/target/lsp-plugin-fw/lsp-plugins-lv2.so
 	einstalldocs
 }
