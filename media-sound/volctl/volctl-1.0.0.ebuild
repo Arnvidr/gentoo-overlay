@@ -184,7 +184,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND=""
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	gui-libs/gtk4-layer-shell"
 BDEPEND=""
 
 RESTRICT="mirror test"
