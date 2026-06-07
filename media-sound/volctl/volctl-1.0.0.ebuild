@@ -172,7 +172,7 @@ CRATES="
 	zvariant_utils@3.3.1
 "
 
-inherit cargo
+inherit cargo gnome2-utils
 
 DESCRIPTION="Per-application volume control for GNU/Linux desktops"
 HOMEPAGE="https://github.com/buzz/volctl"
@@ -194,4 +194,12 @@ src_install() {
 	cargo_src_install
 	insinto /usr/share/glib-2.0/schemas
 	doins ${S}/data/apps.volctl.gschema.xml
+}
+
+pkg_postinst() {
+	gnome2_schemas_update
+}
+
+pkg_postrm() {
+	gnome2_schemas_update
 }
