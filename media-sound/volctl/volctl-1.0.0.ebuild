@@ -190,3 +190,8 @@ BDEPEND=""
 
 RESTRICT="mirror test"
 
+src_install() {
+	default
+	insinto /usr/share/glib-2.0/schemas
+	doins ${S}/data/apps.volctl.gschema.xml
+}
