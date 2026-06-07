@@ -191,7 +191,7 @@ BDEPEND=""
 RESTRICT="mirror test"
 
 src_install() {
-	default
+	cargo_src_install
 	insinto /usr/share/glib-2.0/schemas
 	doins ${S}/data/apps.volctl.gschema.xml
 }
