@@ -4,7 +4,7 @@
 EAPI=8
 
 # Change this when you update the ebuild
-GIT_COMMIT="0f78773429dbb11521fcf1fe6b50c87232a3f624"
+GIT_COMMIT="2c6d90079eeafbbe4468e2067ae241985747cccd"
 EGO_PN="github.com/wtfutil/${PN}"
 
 inherit go-module
@@ -22,7 +22,7 @@ S="${WORKDIR}/${P}"
 
 QA_PRESTRIPPED="usr/bin/.*"
 
-BDEPEND=">=dev-lang/go-1.24.5:="
+BDEPEND=">=dev-lang/go-1.26.4:="
 
 src_compile() {
 	export GOPATH="${S}"
