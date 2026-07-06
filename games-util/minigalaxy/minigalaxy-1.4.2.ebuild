@@ -52,7 +52,6 @@ src_prepare() {
 }
 
 src_compile() {
-	help2man -N -s 6 -n "a simple GTK-based GOG Linux client" bin/minigalaxy > minigalaxy.6 || die
 	lo_files=( data/po/*.po )
 	local lo
 	for lo in "${lo_files[@]%.po}"; do
@@ -66,7 +65,6 @@ src_install() {
 	insinto /usr/share/metainfo
 	doins data/io.github.sharkwouter.Minigalaxy.metainfo.xml
 
-	doman minigalaxy.6
 	domo "${lo_files[@]/%.po/.mo}"
 	unset lo_files
 
