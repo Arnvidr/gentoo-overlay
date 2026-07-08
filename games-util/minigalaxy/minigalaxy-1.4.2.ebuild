@@ -60,8 +60,6 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/share/minigalaxy
-	doins -r data/images data/ui data/style.css
 	insinto /usr/share/metainfo
 	doins data/io.github.sharkwouter.Minigalaxy.metainfo.xml
 
