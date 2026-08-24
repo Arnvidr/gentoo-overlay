@@ -83,7 +83,20 @@ src_compile(){
 }
 
 src_install(){
-	emake PREFIX="/usr" DESTDIR="${ED}" LIB_PATH="/usr/$(get_libdir)" VERBOSE=1 install
+	emake \
+		FEATURES="${MODULES}" \
+		PREFIX="/usr" \
+		DESTDIR="${ED}" \
+		LIBDIR="/usr/$(get_libdir)" \
+		LIB_PATH="/usr/$(get_libdir)" \
+		CC="$(tc-getCC)" \
+		CXX="$(tc-getCXX)" \
+		LD="$(tc-getLD)" \
+		CFLAGS_EXT="${CFLAGS}" \
+		CXXFLAGS_EXT="${CXXFLAGS}" \
+		LDFLAGS_EXT="$(raw-ldflags)" \
+		VERBOSE=1 \
+		install
 	#insinto /usr/local/lib/lv2
 	#doins ${S}/.build/target/lsp-plugin-fw/lsp-plugins-lv2.so
 	#einstalldocs
