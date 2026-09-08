@@ -17,10 +17,10 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+dcraw +ffmpeg +libmediainfo +libzen multiuser +vlc"
-JAVA_PKG_FORCE_VM="openjdk-17"
+JAVA_PKG_FORCE_VM="openjdk-21"
 
 DEPEND="app-arch/unzip"
-RDEPEND=">=virtual/jre-17
+RDEPEND=">=virtual/jre-21
 	dcraw? ( media-gfx/dcraw )
 	ffmpeg? ( media-video/ffmpeg[lame] )
 	libmediainfo? ( media-libs/libmediainfo )
@@ -35,7 +35,7 @@ src_prepare() {
 
 	sed -i -e 's/initialize/none/g' pom.xml || die -n "Failed to patch pom.xml"
 
-	JAVA_HOME=/usr/lib/jvm/openjdk-17 mvn package -P linux-x86_64 -DskipTests || die -n "Failed to package release"
+	JAVA_HOME=/usr/lib/jvm/openjdk-21 mvn package -P linux-x86_64 -DskipTests || die -n "Failed to package release"
 
 	if use multiuser; then
 		cat > ${PN} <<-EOF
