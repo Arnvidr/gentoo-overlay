@@ -4,8 +4,9 @@
 EAPI=8
 
 # Change this when you update the ebuild
-GIT_COMMIT="0f78773429dbb11521fcf1fe6b50c87232a3f624"
-EGO_PN="github.com/wtfutil/${PN}"
+GIT_COMMIT="53be77a2e0be812f85822df0fd9a9c28fcc3242b"
+#EGO_PN="github.com/wtfutil/${PN}"
+EGO_PN="github.com/wtfutil/wtf"
 
 inherit go-module
 
@@ -18,11 +19,11 @@ LICENSE="MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/wtf-${PV}"
 
 QA_PRESTRIPPED="usr/bin/.*"
 
-BDEPEND=">=dev-lang/go-1.24.5:="
+BDEPEND=">=dev-lang/go-1.26.4:="
 
 src_compile() {
 	export GOPATH="${S}"
@@ -37,14 +38,14 @@ src_compile() {
 
 	local mygoargs=(
 		-ldflags "${myldflags[*]}"
-		-o bin/wtfutil
+		-o bin/tessera
 	)
 
 	ego build "${mygoargs[@]}"
 }
 
 src_install() {
-	dobin bin/wtfutil
+	dobin bin/tessera
 	dodoc README.md
 }
 
