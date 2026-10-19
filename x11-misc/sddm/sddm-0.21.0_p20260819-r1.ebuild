@@ -8,13 +8,12 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 else
-	COMMIT=dfa5315fd600760f8f3abddf7fb704202ffb07b3
+	COMMIT=da0b64d8e2378c4bce16cbea6cac2ffc89ad1a4a
 	SRC_URI="https://github.com/${PN}/${PN}/archive/${COMMIT}.tar.gz -> ${P}-${COMMIT:0:8}.tar.gz"
 	S="${WORKDIR}/${PN}-${COMMIT}"
 	KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
 fi
 
-QTMIN=6.7.2
 inherit cmake linux-info pam systemd tmpfiles
 
 DESCRIPTION="Simple Desktop Display Manager"
@@ -31,8 +30,8 @@ RESTRICT="!test? ( test )"
 DEPEND="
 	acct-group/sddm
 	acct-user/sddm
-	>=dev-qt/qtbase-${QTMIN}:6[dbus,gui,network]
-	>=dev-qt/qtdeclarative-${QTMIN}:6
+	dev-qt/qtbase:6[dbus,gui,network]
+	dev-qt/qtdeclarative:6
 	sys-libs/pam
 	x11-libs/libXau
 	x11-libs/libxcb:=
@@ -47,7 +46,7 @@ RDEPEND="${DEPEND}
 "
 BDEPEND="
 	dev-python/docutils
-	>=dev-qt/qttools-${QTMIN}[linguist]
+	dev-qt/qttools[linguist]
 	kde-frameworks/extra-cmake-modules:0
 	virtual/pkgconfig
 "
@@ -56,11 +55,13 @@ PATCHES=(
 	# Downstream patches
 	"${FILESDIR}/${PN}-0.20.0-respect-user-flags.patch"
 	"${FILESDIR}/${PN}-0.21.0_p20250310-Xsession-xinitrc.patch" # bug 611210
-	"${FILESDIR}/${P}-cmake-minreqver-3.16.patch" # pending upstream, bug 964439
-	"${FILESDIR}/${P}-fix-restart-greeter.patch" # pending upstream
+	"${FILESDIR}/${PN}-0.21.0_p20251101-cmake-minreqver-3.16.patch" # pending upstream, bug 964439
+	"${FILESDIR}/${PN}-0.21.0_p20251101-fix-restart-greeter.patch" # pending upstream
+	"${FILESDIR}/${P}-dont-request-vt-signal-delivery.patch" # pending upstream, bug 966586 (?)
 	# thx opensuse
 	"${FILESDIR}/${PN}-0.21.0_p20250310-set-XAUTHLOCALHOSTNAME.patch" # bug 913862
-	"${FILESDIR}/${P}-fix-terminal-clearing.patch"
+	"${FILESDIR}/${PN}-0.21.0_p20251101-fix-terminal-clearing.patch"
+	"${FILESDIR}/${P}-honor-PAM-supplemental-groups-v2.patch" # stalled upstream, bug 914629
 )
 
 pkg_setup() {
