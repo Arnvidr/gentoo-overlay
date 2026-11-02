@@ -15,34 +15,34 @@ CRATES="
 	anstyle-wincon-3.0.11
 	assert_cmd-2.2.2
 	autocfg-1.5.1
-	bitflags-2.13.1
+	bitflags-2.13.2
 	block2-0.6.2
 	bstr-1.13.1
 	bumpalo-3.20.3
-	cc-1.4.3
-	cfg-if-1.0.4
+	cc-1.10.0
+	cfg-if-1.0.5
 	cfg_aliases-0.2.2
 	chrono-0.4.45
-	clap-4.6.6
-	clap_builder-4.6.6
-	clap_complete-4.6.9
-	clap_derive-4.6.4
-	clap_lex-1.1.0
-	clap_mangen-0.2.33
+	clap-4.6.7
+	clap_builder-4.6.7
+	clap_complete-4.6.11
+	clap_derive-4.6.7
+	clap_lex-1.1.1
+	clap_mangen-0.3.3
 	colorchoice-1.0.5
 	config-file-0.2.3
 	core-foundation-sys-0.8.7
-	crossbeam-deque-0.8.7
-	crossbeam-epoch-0.9.20
-	crossbeam-utils-0.8.22
+	crossbeam-deque-0.8.8
+	crossbeam-epoch-0.9.21
+	crossbeam-utils-0.8.23
 	ctrlc-3.5.2
 	difflib-0.4.0
 	dispatch2-0.3.1
-	either-1.17.0
+	either-1.19.0
 	errno-0.3.14
 	fastrand-2.5.0
 	filesize-0.2.0
-	find-msvc-tools-0.1.11
+	find-msvc-tools-0.1.15
 	futures-core-0.3.34
 	futures-task-0.3.34
 	futures-util-0.3.34
@@ -52,20 +52,22 @@ CRATES="
 	iana-time-zone-haiku-0.1.2
 	is_terminal_polyfill-1.70.2
 	itoa-1.0.18
-	js-sys-0.3.104
-	libc-0.2.189
+	js-sys-0.3.106
+	libc-0.2.191
 	linux-raw-sys-0.12.1
-	log-0.4.33
+	log-0.4.34
 	lscolors-0.21.0
 	memchr-2.8.3
 	nix-0.31.3
 	ntapi-0.4.3
 	nu-ansi-term-0.50.3
 	num-traits-0.2.19
-	objc2-0.6.4
+	objc2-0.6.5
 	objc2-core-foundation-0.3.2
 	objc2-encode-4.1.0
+	objc2-foundation-0.3.2
 	objc2-io-kit-0.3.2
+	objc2-open-directory-0.3.2
 	once_cell-1.21.4
 	once_cell_polyfill-1.70.2
 	pin-project-lite-0.2.17
@@ -82,19 +84,20 @@ CRATES="
 	regex-automata-0.4.18
 	regex-syntax-0.8.11
 	roff-1.1.1
-	rustix-1.1.4
+	rustc-hash-2.1.3
+	rustix-1.1.6
 	rustversion-1.0.23
 	serde-1.0.229
 	serde_core-1.0.229
 	serde_derive-1.0.229
-	serde_json-1.0.151
+	serde_json-1.0.154
 	shlex-2.0.1
 	slab-0.4.12
 	stfu8-0.2.7
 	strsim-0.11.1
 	syn-2.0.119
-	syn-3.0.3
-	sysinfo-0.37.2
+	syn-3.0.9
+	sysinfo-0.39.6
 	tempfile-3.27.0
 	terminal_size-0.4.4
 	termtree-0.5.1
@@ -102,34 +105,30 @@ CRATES="
 	thiserror-impl-1.0.69
 	thousands-0.2.0
 	toml-0.5.11
-	unicode-ident-1.0.24
+	unicode-ident-1.0.27
 	unicode-width-0.2.2
 	utf8parse-0.2.2
 	wait-timeout-0.2.1
-	wasm-bindgen-0.2.127
-	wasm-bindgen-macro-0.2.127
-	wasm-bindgen-macro-support-0.2.127
-	wasm-bindgen-shared-0.2.127
+	wasm-bindgen-0.2.129
+	wasm-bindgen-macro-0.2.129
+	wasm-bindgen-macro-support-0.2.129
+	wasm-bindgen-shared-0.2.129
 	winapi-0.3.9
 	winapi-i686-pc-windows-gnu-0.4.0
 	winapi-util-0.1.11
 	winapi-x86_64-pc-windows-gnu-0.4.0
-	windows-0.61.3
-	windows-collections-0.2.0
-	windows-core-0.61.2
+	windows-0.62.2
+	windows-collections-0.3.2
 	windows-core-0.62.2
-	windows-future-0.2.1
+	windows-future-0.3.2
 	windows-implement-0.60.2
 	windows-interface-0.59.3
-	windows-link-0.1.3
 	windows-link-0.2.1
-	windows-numerics-0.2.0
-	windows-result-0.3.4
+	windows-numerics-0.3.1
 	windows-result-0.4.1
-	windows-strings-0.4.2
 	windows-strings-0.5.1
 	windows-sys-0.61.2
-	windows-threading-0.1.0
+	windows-threading-0.2.1
 	zmij-1.0.23
 "
 
