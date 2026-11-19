@@ -13,7 +13,7 @@ inherit java-utils-2 desktop xdg-utils
 MY_PV=$(ver_rs 1- _)
 At=dbvis_linux_${MY_PV}.tar.gz
 
-DESCRIPTION="DB Visualizer (Free Version)"
+DESCRIPTION="DB Visualizer"
 HOMEPAGE="https://www.dbvis.com/"
 SRC_URI="https://www.dbvis.com/product_download/${P}/media/${At}"
 
